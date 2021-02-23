@@ -1,7 +1,21 @@
 clear;docker ps -a
 clear;docker images
 ================================================================================
-docker pull centos/postgresql-96-centos7
+clear;docker build -t local/i2b2-demo-db .
+
+docker run -d --name=i2b2-demo-db \
+-e POSTGRESQL_ADMIN_PASSWORD=demouser \
+-p 5432:5432 \
+local/i2b2-demo-db
+
+docker run -d --name=i2b2-demo-db \
+-e POSTGRESQL_ADMIN_PASSWORD=demouser \
+-p 5432:5432 \
+kvb2univpitt/i2b2-demo-db:v1
+================================================================================
+psql postgresql://postgres:demouser@localhost:5432/postgres -f ./resources/create_database.sql
+================================================================================
+docker pull centos/postgresql-12-centos7
 
 wget https://github.com/i2b2/i2b2-data/archive/v1.7.12a.0001.zip -P resources/
 unzip ./resources/v1.7.12a.0001.zip -d ./resources/
@@ -18,14 +32,7 @@ cp ./resources/db_configs/Workdata/db.properties ./resources/i2b2-data-1.7.12a.0
 ./resources/i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/apache-ant/bin/ant -f ./resources/i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/NewInstall/build.xml create_database
 
 ./resources/i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/apache-ant/bin/ant -f ./resources/i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/NewInstall/build.xml load_demodata
-
-docker run -d --name=i2b2-demo-db \
--e POSTGRESQL_ADMIN_PASSWORD=demouser \
--p 5432:5432 \
-centos/postgresql-96-centos7
-
-psql postgresql://postgres:demouser@localhost:5432/postgres -f ./resources/create_database.sql
-
+================================================================================
 ./resources/edu.harvard.i2b2.data/Release_1-7/apache-ant/bin/ant \
 -f ./resources/edu.harvard.i2b2.data/Release_1-7/NewInstall/build.xml \
 init
