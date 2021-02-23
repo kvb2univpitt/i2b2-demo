@@ -25,7 +25,6 @@ docker run -d --name=i2b2-demo-db \
 centos/postgresql-96-centos7
 
 psql postgresql://postgres:demouser@localhost:5432/postgres -f ./resources/create_database.sql
-psql postgresql://postgres:demouser@localhost:5432/i2b2 -f ./resources/create_tables_users.sql
 
 ./resources/edu.harvard.i2b2.data/Release_1-7/apache-ant/bin/ant \
 -f ./resources/edu.harvard.i2b2.data/Release_1-7/NewInstall/build.xml \
