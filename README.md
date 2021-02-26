@@ -1,5 +1,7 @@
 # i2b2-demo
 
+![Welcome Page](./img/i2b2_demo_flow.png)
+
 ### Run i2b2 demo
 
 #### Run the IdP for SAML authentication
