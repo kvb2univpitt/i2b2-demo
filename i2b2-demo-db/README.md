@@ -9,7 +9,7 @@ A Docker image of the i2b2 demo database version 1.7.12a.
 #### Run in the Container
 A pre-built [Docker image](https://hub.docker.com/r/kvb2univpitt/i2b2-demo-db) is provided on Docker Hub.
 
-```console
+```bash
 docker run -d --name=i2b2-demo-db \
 -e POSTGRESQL_ADMIN_PASSWORD=demouser \
 -p 5432:5432 \
@@ -35,20 +35,20 @@ Open up a terminal in the directory **i2b2-demo-db**, where the file Dockerfile 
 
 *Run the following command to build the image with the latest OS update:*
 
-```console
+```bash
 docker build -t local/i2b2-demo-db .
 ```
 
 Run ```docker images``` to see the downloaded images:
 
-```console
+```bash
 REPOSITORY                                 TAG       IMAGE ID       CREATED          SIZE
 local/i2b2-demo-db                         latest    df51a33c35ec   15 minutes ago   541MB
 ```
 
 *Run the following command to run the image in a container:*
 
-```console
+```bash
 docker run -d --name=i2b2-demo-db \
 -e POSTGRESQL_ADMIN_PASSWORD=demouser \
 -p 5432:5432 \
@@ -63,7 +63,7 @@ The above command will run a Docker container with PostgreSQL on port 5432 havin
 
 Run ```docker ps -a``` to see that the container is running:
 
-```console
+```bash
 CONTAINER ID   IMAGE                COMMAND                  CREATED         STATUS         PORTS                    NAMES
 09cbaa3fe008   local/i2b2-demo-db   "container-entrypoin…"   7 seconds ago   Up 6 seconds   0.0.0.0:5432->5432/tcp   i2b2-demo-db
 ```
@@ -72,13 +72,13 @@ CONTAINER ID   IMAGE                COMMAND                  CREATED         STA
 
 *Run the following command to execute the SQL script that creates the i2b2 database and admin users.*
 
-```console
+```bash
 psql postgresql://postgres:demouser@localhost:5432/postgres -f ./resources/create_database.sql
 ```
 
 You should see the following output:
 
-```console
+```bash
 CREATE DATABASE
 CREATE ROLE
 CREATE ROLE
@@ -103,7 +103,7 @@ Copy the database property files from the ***resources/db_configs*** to the dire
 
 For Linux and Mac OS, run the following command to copy and the replace the files:
 
-```console
+```bash
 cp ./resources/db_configs/Crcdata/db.properties ./i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/NewInstall/Crcdata/
 cp ./resources/db_configs/Hivedata/db.properties ./i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/NewInstall/Hivedata/
 cp ./resources/db_configs/Imdata/db.properties ./i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/NewInstall/Imdata/
@@ -116,7 +116,7 @@ cp ./resources/db_configs/Workdata/db.properties ./i2b2-data-1.7.12a.0001/edu.ha
 
 *Run the following command to import the demo data into the database:*
 
-```console
+```bash
 ./i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/apache-ant/bin/ant \
 -f ./i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/NewInstall/build.xml \
 create_database load_demodata
@@ -130,13 +130,13 @@ Now that the database running in the Docker container has the i2b2 data, we want
 
 *Get the **CONTAINER ID** by running the following:*
 
-```console
+```bash
 docker ps
 ```
 
 You should see the output similar to this:
 
-```console
+```bash
 CONTAINER ID   IMAGE                COMMAND                  CREATED         STATUS         PORTS                    NAMES
 09cbaa3fe008   local/i2b2-demo-db   "container-entrypoin…"   7 seconds ago   Up 6 seconds   0.0.0.0:5432->5432/tcp   i2b2-demo-db
 ```
@@ -145,7 +145,7 @@ In this example, the **CONTAINER ID** is ***09cbaa3fe008***.
 
 *Run the following command to save the container to image:*
 
-```console
+```bash
 docker commit 09cbaa3fe008 local/i2b2-demo-db:v1
 ```
 
@@ -153,7 +153,7 @@ The above command with create a Docker image **local/i2b2-demo-db** with a tag v
 
 To run the above image in a container, run the following command:
 
-```console
+```bash
 docker run -d --name=i2b2-demo-db \
 -e POSTGRESQL_ADMIN_PASSWORD=demouser \
 -p 5432:5432 \
