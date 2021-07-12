@@ -1,6 +1,31 @@
 # i2b2-data-demo
 
-A Docker image of the i2b2-data demo version 1.7.12a.
+A Docker image of the i2b2-data (version 1.7.12a) demo.
+
+## Ensure i2b2-demo-net Network Exists
+
+Containers need to be run on the **i2b2-demo-net** network so that they can communicate with each other.
+
+To verify that network **i2b2-demo-net** exists, open up a terminal and execute the following command:
+
+```
+docker network ls
+```
+
+You should see **i2b2-demo-net** from the output similar to this:
+
+```
+NETWORK ID     NAME            DRIVER    SCOPE
+d86843421945   bridge          bridge    local
+58593240ad9d   host            host      local
+9a82abc00473   i2b2-demo-net   bridge    local
+```
+
+If the **i2b2-demo-net** network does not exists, execute the following command to create one:
+
+```
+docker network create i2b2-demo-net
+```
 
 ## Run the Prebuilt Image in a Container
 
@@ -9,19 +34,21 @@ A Docker image of the i2b2-data demo version 1.7.12a.
 
 A prebuilt [Docker image](https://hub.docker.com/r/kvb2univpitt/i2b2-data-demo) is provided on Docker Hub.  Open up a terminal and execute the following command:
 
-Linux / macOS:
+###### Linux / macOS:
 
 ```
 docker run -d --name=i2b2-demo-db \
+--network i2b2-demo-net \
 -e POSTGRESQL_ADMIN_PASSWORD=demouser \
 -p 5432:5432 \
 kvb2univpitt/i2b2-demo-db:v1.2021.7
 ```
 
-Windows:
+###### Windows:
 
 ```
 docker run -d --name=i2b2-demo-db ^
+--network i2b2-demo-net ^
 -e POSTGRESQL_ADMIN_PASSWORD=demouser ^
 -p 5432:5432 ^
 kvb2univpitt/i2b2-demo-db:v1.2021.7
@@ -78,19 +105,21 @@ centos/postgresql-12-centos7    latest           d12590213acd   11 days ago     
 
 Execute the following command:
 
-Linux / macOS:
+###### Linux / macOS:
 
 ```
 docker run -d --name=i2b2-data-demo \
+--network i2b2-demo-net \
 -e POSTGRESQL_ADMIN_PASSWORD=demouser \
 -p 5432:5432 \
 local/i2b2-data-demo
 ```
 
-Windows:
+###### Windows:
 
 ```
 docker run -d --name=i2b2-data-demo ^
+--network i2b2-demo-net ^
 -e POSTGRESQL_ADMIN_PASSWORD=demouser ^
 -p 5432:5432 ^
 local/i2b2-data-demo
@@ -150,7 +179,7 @@ Download the [i2b2-data-1.7.12a.0001.zip](https://github.com/i2b2/i2b2-data/arch
 
 Open up a terminal in the directory ***i2b2-data-demo***, where the **i2b2-data-1.7.12a.0001.zip** was extracted.  Execute the following command to copy the database property files over:
 
-Linux / macOS:
+###### Linux / macOS:
 
 ```
 cp ./resources/db_configs/Crcdata/db.properties ./i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/NewInstall/Crcdata/
@@ -161,7 +190,7 @@ cp ./resources/db_configs/Pmdata/db.properties ./i2b2-data-1.7.12a.0001/edu.harv
 cp ./resources/db_configs/Workdata/db.properties ./i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/NewInstall/Workdata/
 ```
 
-Windows:
+###### Windows:
 
 ```
 copy ./resources/db_configs/Crcdata/db.properties ./i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/NewInstall/Crcdata/
@@ -176,7 +205,7 @@ copy ./resources/db_configs/Workdata/db.properties ./i2b2-data-1.7.12a.0001/edu.
 
 Execute the following command to run the ant script to insert the i2b2 demo data into the database:
 
-Linux / macOS:
+###### Linux / macOS:
 
 ```
 ./i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/apache-ant/bin/ant \
@@ -184,7 +213,7 @@ Linux / macOS:
 create_database load_demodata
 ```
 
-Windows:
+###### Windows:
 
 ```
 ./i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/apache-ant/bin/ant ^
@@ -193,6 +222,16 @@ create_database load_demodata
 ```
 
 The process should take about 15-20 minutes, depending on how fast your computer is.
+
+### Update the pm_cell_data Table
+
+The i2b2 webclient requests will no longer be made directly to the i2b2 hives (Wildfly server).  All of the requests will be proxy over to the Wildfly server from the Apache server that is hosting the i2b2 webclient. The urls in the **pm_cell_data** table must be updated.
+
+Open up a terminal in the directory ***i2b2-data-saml-demo*** and execute the following command to run the SQL script to update the **pm_cell_data** table:
+
+```
+psql postgresql://postgres:demouser@localhost:5432/i2b2 -f ./resources/update_tables.sql
+```
 
 ### Save the Docker Container State to the Docker Image
 
