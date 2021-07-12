@@ -2,9 +2,9 @@
 
 Docker images preinstalled with [i2b2 software](https://www.i2b2.org/software/index.html) (version 1.7.12a) for demo purposes:
 
- - [i2b2-data](https://github.com/i2b2/i2b2-data)
- - [i2b2-core-server](https://github.com/i2b2/i2b2-core-server)
- - [i2b2-webclient](https://github.com/i2b2/i2b2-webclient)
+- [i2b2-data](https://github.com/i2b2/i2b2-data)
+- [i2b2-core-server](https://github.com/i2b2/i2b2-core-server)
+- [i2b2-webclient](https://github.com/i2b2/i2b2-webclient)
 
 For documentations on the i2b2 software please visit the [i2b2 Community Wiki](https://community.i2b2.org/wiki/)
 
@@ -49,26 +49,26 @@ d86843421945   bridge          bridge    local
 
 Execute the commands below to run prebuild Docker images in contains on the i2b2-demo-net network.
 
-**Run i2b2-demo-db container:**
+**Run i2b2-data-demo container:**
 
 ###### Linux / macOS:
 
 ```
-docker run -d --name=i2b2-demo-db \
+docker run -d --name=i2b2-data-demo \
 --network i2b2-demo-net \
 -e POSTGRESQL_ADMIN_PASSWORD=demouser \
 -p 5432:5432 \
-kvb2univpitt/i2b2-demo-db:v1.2021.7
+kvb2univpitt/i2b2-data-demo:v1.2021.7
 ```
 
 ###### Windows
 
 ```
-docker run -d --name=i2b2-demo-db ^
+docker run -d --name=i2b2-data-demo ^
 --network i2b2-demo-net ^
 -e POSTGRESQL_ADMIN_PASSWORD=demouser ^
 -p 5432:5432 ^
-kvb2univpitt/i2b2-demo-db:v1.2021.7
+kvb2univpitt/i2b2-data-demo:v1.2021.7
 ```
 
 **Run i2b2-core-server-demo container:**

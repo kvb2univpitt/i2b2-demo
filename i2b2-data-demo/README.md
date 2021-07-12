@@ -37,21 +37,21 @@ A prebuilt [Docker image](https://hub.docker.com/r/kvb2univpitt/i2b2-data-demo) 
 ###### Linux / macOS:
 
 ```
-docker run -d --name=i2b2-demo-db \
+docker run -d --name=i2b2-data-demo \
 --network i2b2-demo-net \
 -e POSTGRESQL_ADMIN_PASSWORD=demouser \
 -p 5432:5432 \
-kvb2univpitt/i2b2-demo-db:v1.2021.7
+kvb2univpitt/i2b2-data-demo:v1.2021.7
 ```
 
 ###### Windows:
 
 ```
-docker run -d --name=i2b2-demo-db ^
+docker run -d --name=i2b2-data-demo ^
 --network i2b2-demo-net ^
 -e POSTGRESQL_ADMIN_PASSWORD=demouser ^
 -p 5432:5432 ^
-kvb2univpitt/i2b2-demo-db:v1.2021.7
+kvb2univpitt/i2b2-data-demo:v1.2021.7
 ```
 
 The above command will run PostgreSQL 12 on port 5432 in a Docker container with the following default PostgreSQL admin account:
