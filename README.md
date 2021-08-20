@@ -58,7 +58,7 @@ docker run -d --name=i2b2-data-demo \
 --network i2b2-demo-net \
 -e POSTGRESQL_ADMIN_PASSWORD=demouser \
 -p 5432:5432 \
-kvb2univpitt/i2b2-data-demo:v1.2021.7
+kvb2univpitt/i2b2-data-demo:v1.2021.8
 ```
 
 ###### Windows
@@ -68,7 +68,7 @@ docker run -d --name=i2b2-data-demo ^
 --network i2b2-demo-net ^
 -e POSTGRESQL_ADMIN_PASSWORD=demouser ^
 -p 5432:5432 ^
-kvb2univpitt/i2b2-data-demo:v1.2021.7
+kvb2univpitt/i2b2-data-demo:v1.2021.8
 ```
 
 **Run i2b2-core-server-demo container:**
@@ -79,7 +79,7 @@ kvb2univpitt/i2b2-data-demo:v1.2021.7
 docker run -d --name=i2b2-core-server-demo \
 --network i2b2-demo-net \
 -p 9090:9090 \
-kvb2univpitt/i2b2-core-server-demo:v1.2021.7
+kvb2univpitt/i2b2-core-server-demo:v1.2021.8
 ```
 
 ###### Windows
@@ -88,7 +88,7 @@ kvb2univpitt/i2b2-core-server-demo:v1.2021.7
 docker run -d --name=i2b2-core-server-demo ^
 --network i2b2-demo-net ^
 -p 9090:9090 ^
-kvb2univpitt/i2b2-core-server-demo:v1.2021.7
+kvb2univpitt/i2b2-core-server-demo:v1.2021.8
 ```
 
 **Run i2b2-webclient-demo container:**
@@ -99,7 +99,7 @@ kvb2univpitt/i2b2-core-server-demo:v1.2021.7
 docker run -d --name=i2b2-webclient-demo \
 --network i2b2-demo-net \
 -p 80:80 -p 443:443 \
-kvb2univpitt/i2b2-webclient-demo:v1.2021.7
+kvb2univpitt/i2b2-webclient-demo:v1.2021.8
 ```
 
 ###### Windows
@@ -108,5 +108,5 @@ kvb2univpitt/i2b2-webclient-demo:v1.2021.7
 docker run -d --name=i2b2-webclient-demo ^
 --network i2b2-demo-net ^
 -p 80:80 -p 443:443 ^
-kvb2univpitt/i2b2-webclient-demo:v1.2021.7
+kvb2univpitt/i2b2-webclient-demo:v1.2021.8
 ```
