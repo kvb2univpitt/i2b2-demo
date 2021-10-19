@@ -41,7 +41,7 @@ A prebuilt [Docker image](https://hub.docker.com/r/kvb2univpitt/i2b2-webclient-d
 docker run -d --name=i2b2-webclient-demo \
 --network i2b2-demo-net \
 -p 80:80 -p 443:443 \
-kvb2univpitt/i2b2-webclient-demo:v1.2021.8
+kvb2univpitt/i2b2-webclient-demo:v1.2021.10
 ```
 
 ###### Windows:
@@ -50,7 +50,7 @@ kvb2univpitt/i2b2-webclient-demo:v1.2021.8
 docker run -d --name=i2b2-webclient-demo ^
 --network i2b2-demo-net ^
 -p 80:80 -p 443:443 ^
-kvb2univpitt/i2b2-webclient-demo:v1.2021.8
+kvb2univpitt/i2b2-webclient-demo:v1.2021.10
 ```
 
 The above command will run the i2b2-webclient on port 80 (http) and port 443 (https).
@@ -77,7 +77,7 @@ The output should be similar to the following:
 
 ```
 REPOSITORY                           TAG              IMAGE ID       CREATED             SIZE
-local/i2b2-webclient-demo            v1.2021.8        d12cc0f781d5   4 minutes ago       451MB
+local/i2b2-webclient-demo            v1.2021.10        d12cc0f781d5   4 minutes ago       451MB
 ```
 
 ### Run the Image In the Container

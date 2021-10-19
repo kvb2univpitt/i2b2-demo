@@ -41,7 +41,7 @@ A prebuilt [Docker image](https://hub.docker.com/r/kvb2univpitt/i2b2-core-server
 docker run -d --name=i2b2-core-server-demo \
 --network i2b2-demo-net \
 -p 9090:9090 \
-kvb2univpitt/i2b2-core-server-demo:v1.2021.8
+kvb2univpitt/i2b2-core-server-demo:v1.2021.10
 ```
 
 ###### Windows:
@@ -50,7 +50,7 @@ kvb2univpitt/i2b2-core-server-demo:v1.2021.8
 docker run -d --name=i2b2-core-server-demo ^
 --network i2b2-demo-net ^
 -p 9090:9090 ^
-kvb2univpitt/i2b2-core-server-demo:v1.2021.8
+kvb2univpitt/i2b2-core-server-demo:v1.2021.10
 ```
 
 ## Build the Image

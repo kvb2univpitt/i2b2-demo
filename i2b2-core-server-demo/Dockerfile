@@ -1,4 +1,4 @@
-FROM kvb2univpitt/centos7-openjdk8:v1.2021.8
+FROM kvb2univpitt/centos7-openjdk8:v1.2021.10
 
 LABEL maintainer="Kevin Bui"
 
