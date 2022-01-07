@@ -8,6 +8,7 @@ obtain one at http://mozilla.org/MPL/2.0/. I2b2 is also distributed under
 the terms of the Healthcare Disclaimer.
 -->
 <datasources xmlns="http://www.jboss.org/ironjacamar/schema">
+    <!-- POSTGRESQL -->
     <datasource jta="false" jndi-name="java:/WorkplaceBootStrapDS" pool-name="WorkplaceBootStrapDS" enabled="true" use-ccm="false">
         <connection-url>jdbc:postgresql://i2b2-data-demo:5432/i2b2</connection-url>
         <driver-class>org.postgresql.Driver</driver-class>
@@ -48,4 +49,48 @@ the terms of the Healthcare Disclaimer.
             <share-prepared-statements>false</share-prepared-statements>
         </statement>
     </datasource>
+
+    <!-- SQL SERVER -->
+    <!--
+    <datasource jta="false" jndi-name="java:/WorkplaceBootStrapDS" pool-name="WorkplaceBootStrapDS" enabled="true" use-ccm="false">
+        <connection-url>jdbc:sqlserver://i2b2-data-demo:1433;databaseName=i2b2</connection-url>
+        <driver-class>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver-class>
+        <driver>mssql-jdbc-9.2.0.jre8.jar</driver>
+        <security>
+            <user-name>i2b2hive</user-name>
+            <password>demouser</password>
+        </security>
+        <validation>
+            <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.mssql.MSSQLValidConnectionChecker"/>
+            <validate-on-match>false</validate-on-match>
+            <background-validation>true</background-validation>
+            <background-validation-millis>60000</background-validation-millis>
+            <use-fast-fail>true</use-fast-fail>
+            <check-valid-connection-sql>SELECT 1</check-valid-connection-sql>
+        </validation>
+        <statement>
+            <share-prepared-statements>false</share-prepared-statements>
+        </statement>
+    </datasource>
+    <datasource jta="false" jndi-name="java:/WorkplaceDemoDS" pool-name="WorkplaceDemoDS" enabled="true" use-ccm="false">
+        <connection-url>jdbc:sqlserver://i2b2-data-demo:1433;databaseName=i2b2</connection-url>
+        <driver-class>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver-class>
+        <driver>mssql-jdbc-9.2.0.jre8.jar</driver>
+        <security>
+            <user-name>i2b2workdata</user-name>
+            <password>demouser</password>
+        </security>
+        <validation>
+            <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.mssql.MSSQLValidConnectionChecker"/>
+            <validate-on-match>false</validate-on-match>
+            <background-validation>true</background-validation>
+            <background-validation-millis>60000</background-validation-millis>
+            <use-fast-fail>true</use-fast-fail>
+            <check-valid-connection-sql>SELECT 1</check-valid-connection-sql>
+        </validation>
+        <statement>
+            <share-prepared-statements>false</share-prepared-statements>
+        </statement>
+    </datasource>
+    -->
 </datasources>
