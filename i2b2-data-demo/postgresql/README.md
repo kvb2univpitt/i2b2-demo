@@ -1,4 +1,4 @@
-# i2b2-data-demo
+# i2b2-data-demo: PostgreSQL 12
 
 A Docker image of the i2b2-data (version 1.7.12a) demo.
 
