@@ -1,0 +1,3 @@
+-- SQL Server
+CREATE DATABASE i2b2;
+GO
