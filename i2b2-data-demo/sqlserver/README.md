@@ -88,8 +88,12 @@ You should see the following output:
 
 ```
 -- SQL Server
-CREATE DATABASE i2b2;
-
+CREATE DATABASE i2b2demodata;
+CREATE DATABASE i2b2hive;
+CREATE DATABASE i2b2imdata;
+CREATE DATABASE i2b2metadata;
+CREATE DATABASE i2b2pm;
+CREATE DATABASE i2b2workdata;
 ```
 
 #### Create Users For i2b2 Database
@@ -110,31 +114,33 @@ CREATE LOGIN i2b2imdata WITH PASSWORD = 'demouser',CHECK_POLICY=OFF,CHECK_EXPIRA
 CREATE LOGIN i2b2metadata WITH PASSWORD = 'demouser',CHECK_POLICY=OFF,CHECK_EXPIRATION=OFF;
 CREATE LOGIN i2b2pm WITH PASSWORD = 'demouser',CHECK_POLICY=OFF,CHECK_EXPIRATION=OFF;
 CREATE LOGIN i2b2workdata WITH PASSWORD = 'demouser',CHECK_POLICY=OFF,CHECK_EXPIRATION=OFF;
-USE i2b2;CREATE USER i2b2demodata FOR LOGIN i2b2demodata;
-USE i2b2;CREATE USER i2b2hive FOR LOGIN i2b2hive;
-USE i2b2;CREATE USER i2b2imdata FOR LOGIN i2b2imdata;
-USE i2b2;CREATE USER i2b2metadata FOR LOGIN i2b2metadata;
-USE i2b2;CREATE USER i2b2pm FOR LOGIN i2b2pm;
-USE i2b2;CREATE USER i2b2workdata FOR LOGIN i2b2workdata;
-USE i2b2;GRANT Control TO i2b2demodata;
-USE i2b2;GRANT Control TO i2b2hive;
-USE i2b2;GRANT Control TO i2b2imdata;
-USE i2b2;GRANT Control TO i2b2metadata;
-USE i2b2;GRANT Control TO i2b2pm;
-USE i2b2;GRANT Control TO i2b2workdata;
 
-Changed database context to 'i2b2'.
-Changed database context to 'i2b2'.
-Changed database context to 'i2b2'.
-Changed database context to 'i2b2'.
-Changed database context to 'i2b2'.
-Changed database context to 'i2b2'.
-Changed database context to 'i2b2'.
-Changed database context to 'i2b2'.
-Changed database context to 'i2b2'.
-Changed database context to 'i2b2'.
-Changed database context to 'i2b2'.
-Changed database context to 'i2b2'.
+USE i2b2demodata;CREATE USER i2b2demodata FOR LOGIN i2b2demodata;
+USE i2b2hive;CREATE USER i2b2hive FOR LOGIN i2b2hive;
+USE i2b2imdata;CREATE USER i2b2imdata FOR LOGIN i2b2imdata;
+USE i2b2metadata;CREATE USER i2b2metadata FOR LOGIN i2b2metadata;
+USE i2b2pm;CREATE USER i2b2pm FOR LOGIN i2b2pm;
+USE i2b2workdata;CREATE USER i2b2workdata FOR LOGIN i2b2workdata;
+
+USE i2b2demodata;GRANT CONTROL TO i2b2demodata;
+USE i2b2hive;GRANT CONTROL TO i2b2hive;
+USE i2b2imdata;GRANT CONTROL TO i2b2imdata;
+USE i2b2metadata;GRANT CONTROL TO i2b2metadata;
+USE i2b2pm;GRANT CONTROL TO i2b2pm;
+USE i2b2workdata;GRANT CONTROL TO i2b2workdata;
+
+Changed database context to 'i2b2demodata'.
+Changed database context to 'i2b2hive'.
+Changed database context to 'i2b2imdata'.
+Changed database context to 'i2b2metadata'.
+Changed database context to 'i2b2pm'.
+Changed database context to 'i2b2workdata'.
+Changed database context to 'i2b2demodata'.
+Changed database context to 'i2b2hive'.
+Changed database context to 'i2b2imdata'.
+Changed database context to 'i2b2metadata'.
+Changed database context to 'i2b2pm'.
+Changed database context to 'i2b2workdata'.
 ```
 
 ### Insert i2b2 Demo Data into the Database
