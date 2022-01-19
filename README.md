@@ -189,3 +189,76 @@ You should see the login page, as shown below.  The username is **demo** and the
 Once you log in, you should see the main page like the one below:
 
 ![Main Page](./img/main_page.png)
+
+### Stop the Docker Containers
+
+Stop the **i2b2-webclient-demo** container:
+
+```
+docker stop i2b2-webclient-demo
+```
+
+Stop the **i2b2-core-server-demo** container:
+
+```
+docker stop i2b2-core-server-demo
+```
+
+Stop the **i2b2-data-demo** container:
+
+```
+docker stop i2b2-data-demo
+```
+
+### Remove the Docker Containers
+
+Remove the **i2b2-webclient-demo** container:
+
+```
+docker rm i2b2-webclient-demo
+```
+
+Remove the **i2b2-core-server-demo** container:
+
+```
+docker rm i2b2-core-server-demo
+```
+
+Remove the **i2b2-data-demo** container:
+
+```
+docker rm i2b2-data-demo
+```
+
+### Delete the Docker Images
+
+
+Delete the **i2b2-webclient-demo** container:
+
+```
+docker rmi kvb2univpitt/i2b2-webclient-demo:v1.7.12a.2022.01
+```
+
+Delete the **i2b2-core-server-demo** container (**PostgreSQL**):
+
+```
+docker rmi kvb2univpitt/i2b2-core-server-demo-postgresql:v1.7.12a.2022.01
+```
+
+Delete the **i2b2-core-server-demo** container (**SQL Server**):
+
+```
+docker rmi kvb2univpitt/i2b2-core-server-demo-sqlserver:v1.7.12a.2022.01
+```
+
+Delete the **i2b2-data-demo** container (**PostgreSQL**):
+
+```
+docker rmi kvb2univpitt/i2b2-data-demo-postgresql:v1.7.12a.2022.01
+```
+
+Delete the **i2b2-data-demo** container (**SQL Server**):
+
+```
+docker rmi kvb2univpitt/i2b2-data-demo-sqlserver:v1.7.12a.2022.01
+```
