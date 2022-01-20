@@ -104,6 +104,30 @@ docker run -d --name=i2b2-data-demo ^
 kvb2univpitt/i2b2-data-demo-sqlserver:v1.7.12a.2022.01
 ```
 
+##### Oracle 11g Release 2
+
+###### Linux / macOS:
+
+```
+docker run -d --name i2b2-data-demo \
+--network i2b2-demo-net \
+--shm-size="4G" \
+-p 1521:1521 -p 5500:5500 \
+-e ORACLE_PWD=demouser \
+kvb2univpitt/i2b2-data-demo-oracle:v1.7.12a.2022.01
+```
+
+###### Windows
+
+```
+docker run -d --name i2b2-data-demo ^
+--network i2b2-demo-net ^
+--shm-size="4G" ^
+-p 1521:1521 -p 5500:5500 ^
+-e ORACLE_PWD=demouser ^
+kvb2univpitt/i2b2-data-demo-oracle:v1.7.12a.2022.01
+```
+
 **Run i2b2-core-server-demo container:**
 
 The i2b2-core-server-demo is the SOAP web services (i2b2 Hive).  The web services communicate directly with i2b2 web application and the i2b2 database.
@@ -148,6 +172,26 @@ docker run -d --name=i2b2-core-server-demo ^
 --network i2b2-demo-net ^
 -p 9090:9090 ^
 kvb2univpitt/i2b2-core-server-demo-sqlserver:v1.7.12a.2022.01
+```
+
+##### Oracle 11g Release 2
+
+###### Linux / macOS:
+
+```
+docker run -d --name=i2b2-core-server-demo \
+--network i2b2-demo-net \
+-p 9090:9090 \
+kvb2univpitt/i2b2-core-server-demo-oracle:v1.7.12a.2022.01
+```
+
+###### Windows
+
+```
+docker run -d --name=i2b2-core-server-demo ^
+--network i2b2-demo-net ^
+-p 9090:9090 ^
+kvb2univpitt/i2b2-core-server-demo-oracle:v1.7.12a.2022.01
 ```
 
 **Run i2b2-webclient-demo container:**
@@ -251,6 +295,12 @@ Delete the **i2b2-core-server-demo** container (**SQL Server**):
 docker rmi kvb2univpitt/i2b2-core-server-demo-sqlserver:v1.7.12a.2022.01
 ```
 
+Delete the **i2b2-core-server-demo** container (**Oracle 11g Release 2**):
+
+```
+docker rmi kvb2univpitt/i2b2-core-server-demo-oracle:v1.7.12a.2022.01
+```
+
 Delete the **i2b2-data-demo** container (**PostgreSQL**):
 
 ```
@@ -261,4 +311,10 @@ Delete the **i2b2-data-demo** container (**SQL Server**):
 
 ```
 docker rmi kvb2univpitt/i2b2-data-demo-sqlserver:v1.7.12a.2022.01
+```
+
+Delete the **i2b2-data-demo** container (**Oracle 11g Release 2**):
+
+```
+docker rmi kvb2univpitt/i2b2-data-demo-oracle:v1.7.12a.2022.01
 ```
