@@ -1,12 +1,20 @@
-# i2b2-data-demo: PostgreSQL 12
+# i2b2-data-demo (PostgreSQL 12)
 
-A Docker image of the i2b2-data (version 1.7.12a) demo.
+A Docker image containing PostgreSQL 12 database with i2b2 demo data.
 
-## Ensure i2b2-demo-net Network Exists
+## Run the Prebuilt Image
 
-Containers need to be run on the **i2b2-demo-net** network so that they can communicate with each other.
+A prebuilt [Docker image](https://hub.docker.com/r/kvb2univpitt/i2b2-data-demo) is provided to get the database up and running quickly.
 
-To verify that network **i2b2-demo-net** exists, open up a terminal and execute the following command:
+### Prerequisites
+
+- [Docker 19.x](https://docs.docker.com/get-docker/)
+
+### Create a User-defined Bridge Network
+
+The Docker containers will run on a user-defined bridge network **i2b2-demo-net** so that they can communicate with each other using their container names instead of IP addresses.
+
+To verify that the **i2b2-demo-net** network exists, open up a terminal and execute the following command:
 
 ```
 docker network ls
@@ -21,18 +29,15 @@ d86843421945   bridge          bridge    local
 9a82abc00473   i2b2-demo-net   bridge    local
 ```
 
-If the **i2b2-demo-net** network does not exists, execute the following command to create one:
+If the **i2b2-demo-net** network does not exists, execute the following command to create it:
 
 ```
 docker network create i2b2-demo-net
 ```
 
-## Run the Prebuilt Image in a Container
+### Run the Prebuilt Image in a Container
 
-### Prerequisites
-- [Docker 19.x](https://docs.docker.com/get-docker/)
-
-A prebuilt [Docker image](https://hub.docker.com/r/kvb2univpitt/i2b2-data-demo) is provided on Docker Hub.  Open up a terminal and execute the following command:
+Open a terminal and execute the following command to download the prebuilt image from Docker Hub and run it in a Docker container. 
 
 ###### Linux / macOS:
 
@@ -68,26 +73,37 @@ The following user account has been created and stored in the database for loggi
 |----------|----------|
 | demo     | demouser |
 
+### Access the Database
+
+The database can be accessed with any database tool by using the following configurations:
+
+| Attribute | Value     |
+|-----------|-----------|
+| Host      | localhost |
+| Port      | 5432      |
+| Database  | i2b2      |
+| Username  | postgres  |
+| Password  | demouser  |
+
 ## Build the Image
 
 ### Prerequisites
 
 - [Docker 19.x](https://docs.docker.com/get-docker/)
--  Java SDK 8 or higher ([Oracle JDK](https://www.oracle.com/java/technologies/javase-downloads.html) or [OpenJDK](https://adoptopenjdk.net/))
-- [Apache Ant 1.10.x](https://ant.apache.org/bindownload.cgi)
+-  Java SDK 8 ([Oracle JDK](https://www.oracle.com/java/technologies/javase-downloads.html) or [OpenJDK](https://adoptopenjdk.net/))
 - [PostgreSQL 12](https://www.postgresql.org/download/)
 
 ### Build the Docker Image:
 
-Open up a terminal to where the Dockerfile is in the directory ***i2b2-data-demo***, containing the file **Dockerfile**, and execute the following command:
+Open up a terminal in the directory ***i2b2-data-demo***, where the **Dockerfile** file is.
+
+Execute the following command to build the image:
 
 ```
 docker build -t local/i2b2-data-demo .
 ```
 
-The above command will build a Docker image with CentOS 7 and PostgreSQL 12 installed.
-
-To verify that the image has been buit, execute the following command:
+To verify that the image has been built, execute the following command:
 
 ```
 docker images
@@ -125,8 +141,6 @@ docker run -d --name=i2b2-data-demo ^
 local/i2b2-data-demo
 ```
 
-The above command will run PostgreSQL on port 5432 in a Docker container.
-
 To verify that PostgreSQL is running in a container, execute the following command:
 
 ```
@@ -142,7 +156,7 @@ CONTAINER ID   IMAGE                  COMMAND                  CREATED          
 
 ### Create Database i2b2 and Database Users
 
-Open up a terminal in the directory ***i2b2-data-demo*** and execute the following command the run the SQL script to create a database called **i2b2** along with the database users:
+Open up a terminal in the directory ***i2b2-data-demo***.  Execute the following command to run PostgreSQL to execute the SQL script that creates a database called **i2b2** along with the database users:
 
 ```
 psql postgresql://postgres:demouser@localhost:5432/postgres -f ./resources/create_database.sql
@@ -166,8 +180,6 @@ GRANT
 GRANT
 GRANT
 ```
-
-> The i2b2 database users are associated with the i2b2 database and are used by the i2b2 core-server to access the database.
 
 ### Insert i2b2 Demo Data to the Database
 
@@ -225,9 +237,9 @@ The process should take about 15-20 minutes, depending on how fast your computer
 
 ### Update the pm_cell_data Table
 
-The i2b2 webclient requests will no longer be made directly to the i2b2 hives (Wildfly server).  All of the requests will be proxy over to the Wildfly server from the Apache server that is hosting the i2b2 webclient. The urls in the **pm_cell_data** table must be updated.
+As mentioned above, the Docker containers run on a user-defined bridge network **i2b2-demo-net** so that the containers can communicate with eacher using the container names.  The **pm_cell_data** table contains URLs for the web application to communicate with the **i2b2-core-server**.  The URLs need to be updated from ***localhost*** to the Docker container name ***i2b2-core-server-demo***.
 
-Open up a terminal in the directory ***i2b2-data-saml-demo*** and execute the following command to run the SQL script to update the **pm_cell_data** table:
+Open up a terminal in the directory ***i2b2-data-saml-demo***.  Execute the following command to run PostgreSQL to execute the SQL script that updates the IP address to the container name in the **pm_cell_data** table:
 
 ```
 psql postgresql://postgres:demouser@localhost:5432/i2b2 -f ./resources/update_tables.sql
