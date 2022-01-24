@@ -4,7 +4,7 @@ A Docker image containing PostgreSQL 12 database with i2b2 demo data.
 
 ## Run the Prebuilt Image
 
-A prebuilt [Docker image](https://hub.docker.com/r/kvb2univpitt/i2b2-data-demo) is provided to get the database up and running quickly.
+A prebuilt [Docker image](https://hub.docker.com/r/kvb2univpitt/i2b2-data-saml-demo-postgresql) is provided to get the database up and running quickly.
 
 ### Prerequisites
 
