@@ -4,7 +4,7 @@ A Docker image containing PostgreSQL 12 database with i2b2 demo data.
 
 ## Run the Prebuilt Image
 
-A prebuilt [Docker image](https://hub.docker.com/r/kvb2univpitt/i2b2-data-saml-demo-postgresql) is provided to get the database up and running quickly.
+A prebuilt [Docker image](https://hub.docker.com/r/kvb2univpitt/i2b2-data-demo-postgresql) is provided to get the database up and running quickly.
 
 ### Prerequisites
 
@@ -95,7 +95,7 @@ The database can be accessed with any database tool by using the following confi
 
 ### Build the Docker Image:
 
-Open up a terminal in the directory ***i2b2-data-demo***, where the **Dockerfile** file is.
+Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/postgresql**, where the ***Dockerfile*** file is.
 
 Execute the following command to build the image:
 
@@ -156,7 +156,7 @@ CONTAINER ID   IMAGE                  COMMAND                  CREATED          
 
 ### Create Database i2b2 and Database Users
 
-Open up a terminal in the directory ***i2b2-data-demo***.  Execute the following command to run PostgreSQL to execute the SQL script that creates a database called **i2b2** along with the database users:
+Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/postgresql**.  Execute the following command to run PostgreSQL to execute the SQL script that creates a database called **i2b2** along with the database users:
 
 ```
 psql postgresql://postgres:demouser@localhost:5432/postgres -f ./resources/create_database.sql
@@ -189,7 +189,7 @@ Download the [i2b2-data-1.7.12a.0001.zip](https://github.com/i2b2/i2b2-data/arch
 
 #### Copy the Database Property Files to the i2b2-data Software
 
-Open up a terminal in the directory ***i2b2-data-demo***, where the **i2b2-data-1.7.12a.0001.zip** was extracted.  Execute the following command to copy the database property files over:
+Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/postgresql**, where the **i2b2-data-1.7.12a.0001.zip** was extracted.  Execute the following command to copy the database property files over:
 
 ###### Linux / macOS:
 
@@ -239,7 +239,7 @@ The process should take about 15-20 minutes, depending on how fast your computer
 
 As mentioned above, the Docker containers run on a user-defined bridge network **i2b2-demo-net** so that the containers can communicate with eacher using the container names.  The **pm_cell_data** table contains URLs for the web application to communicate with the **i2b2-core-server**.  The URLs need to be updated from ***localhost*** to the Docker container name ***i2b2-core-server-demo***.
 
-Open up a terminal in the directory ***i2b2-data-saml-demo***.  Execute the following command to run PostgreSQL to execute the SQL script that updates the IP address to the container name in the **pm_cell_data** table:
+Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/postgresql**.  Execute the following command to run PostgreSQL to execute the SQL script that updates the IP address to the container name in the **pm_cell_data** table:
 
 ```
 psql postgresql://postgres:demouser@localhost:5432/i2b2 -f ./resources/update_tables.sql

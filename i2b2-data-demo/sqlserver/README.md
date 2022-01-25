@@ -96,7 +96,7 @@ The database can be accessed with any database tool by using the following confi
 -  Java SDK 8 ([Oracle JDK](https://www.oracle.com/java/technologies/javase-downloads.html) or [OpenJDK](https://adoptopenjdk.net/))
 - [SQL Server command-line tools](https://docs.microsoft.com/en-us/sql/linux/sql-server-linux-setup-tools?view=sql-server-ver15)
 
-Open up a terminal in the directory **i2b2-data-demo/sqlserver** where the file ***Dockerfile*** is and execute the following command:
+Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/sqlserver** where the file ***Dockerfile*** is and execute the following command:
 
 ```
 docker build -t local/i2b2-data-demo-sqlserver .
@@ -130,7 +130,7 @@ local/i2b2-data-demo-sqlserver
 
 ### Run SQL Scripts to Setup the Database
 
-Open up a terminal in the directory ***i2b2-data-demo/sqlserver***.
+Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/sqlserver**.
 
 #### Create Database i2b2
 
@@ -203,11 +203,11 @@ Changed database context to 'i2b2workdata'.
 
 #### Download the i2b2 Software
 
-Download the [i2b2-data-1.7.12a.0001.zip](https://github.com/i2b2/i2b2-data/archive/refs/tags/v1.7.12a.0001.zip) and unzip the file to the directory ***i2b2-data-demo***.
+Download the [i2b2-data-1.7.12a.0001.zip](https://github.com/i2b2/i2b2-data/archive/refs/tags/v1.7.12a.0001.zip) and unzip the file to the directory **i2b2-demo/i2b2-data-demo/sqlserver**.
 
 #### Copy the Database Property Files to the i2b2-data Software
 
-Open up a terminal in the directory ***i2b2-data-demo***, where the **i2b2-data-1.7.12a.0001.zip** was extracted.  Execute the following command to copy the database property files over:
+Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/sqlserver**, where the **i2b2-data-1.7.12a.0001.zip** was extracted.  Execute the following command to copy the database property files over:
 
 ###### Linux / macOS:
 
@@ -257,7 +257,7 @@ create_database load_demodata
 
 As mentioned above, the Docker containers run on a user-defined bridge network **i2b2-demo-net** so that the containers can communicate with eacher using the container names.  The **pm_cell_data** table contains URLs for the web application to communicate with the **i2b2-core-server**.  The URLs need to be updated from ***localhost*** to the Docker container name ***i2b2-core-server-demo***.
 
-Open up a terminal in the directory ***i2b2-data-saml-demo***.  Execute the following command to run PostgreSQL to execute the SQL script that updates the IP address to the container name in the **pm_cell_data** table:
+Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/sqlserver**.  Execute the following command to run PostgreSQL to execute the SQL script that updates the IP address to the container name in the **pm_cell_data** table:
 
 ```
 sqlcmd -S localhost -U sa -P Demouser123! -i ./resources/update_tables.sql -e
