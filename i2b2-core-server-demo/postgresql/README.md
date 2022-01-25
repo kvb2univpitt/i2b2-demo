@@ -1,6 +1,6 @@
-# i2b2-core-server-demo
+# i2b2-core-server-demo (PostgreSQL 12)
 
-A Docker image of the i2b2-core-server (version 1.7.12a) demo.
+A Docker image of the i2b2-core-server (version 1.7.12a) working with PostgreSQL database.
 
 ## Ensure i2b2-demo-net Network Exists
 
@@ -33,7 +33,7 @@ docker network create i2b2-demo-net
 
 - [Docker 19.x](https://docs.docker.com/get-docker/)
 
-A prebuilt [Docker image](https://hub.docker.com/r/kvb2univpitt/i2b2-core-server-demo) is provided on Docker Hub.  Open up a terminal and execute the following command:
+A prebuilt [Docker image](https://hub.docker.com/r/kvb2univpitt/i2b2-core-server-demo-postgresql) is provided on Docker Hub.  Open up a terminal and execute the following command:
 
 ###### Linux / macOS:
 
@@ -41,7 +41,7 @@ A prebuilt [Docker image](https://hub.docker.com/r/kvb2univpitt/i2b2-core-server
 docker run -d --name=i2b2-core-server-demo \
 --network i2b2-demo-net \
 -p 9090:9090 \
-kvb2univpitt/i2b2-core-server-demo:v1.2021.10
+kvb2univpitt/i2b2-core-server-demo-postgresql:v1.7.12a.2022.01
 ```
 
 ###### Windows:
@@ -50,7 +50,7 @@ kvb2univpitt/i2b2-core-server-demo:v1.2021.10
 docker run -d --name=i2b2-core-server-demo ^
 --network i2b2-demo-net ^
 -p 9090:9090 ^
-kvb2univpitt/i2b2-core-server-demo:v1.2021.10
+kvb2univpitt/i2b2-core-server-demo-postgresql:v1.7.12a.2022.01
 ```
 
 ## Build the Image
@@ -59,13 +59,13 @@ kvb2univpitt/i2b2-core-server-demo:v1.2021.10
 
 - [Docker 19.x](https://docs.docker.com/get-docker/)
 
-Open up a terminal in the directory ***i2b2-core-server-demo***, containing the file **Dockerfile**, and execute the following command to build the Docker image:
+Open up a terminal in the directory ***i2b2-demo/i2b2-core-server-demo/postgresql***, containing the file **Dockerfile**, and execute the following command to build the Docker image:
 
 ```
-docker build -t local/i2b2-core-server-demo .
+docker build -t local/i2b2-core-server-demo-postgresql .
 ```
 
-To verify that the image has been buit, execute the following command:
+To verify that the image has been built, execute the following command to see the list of Docker images:
 
 ```
 docker images
@@ -74,13 +74,13 @@ docker images
 The output should be similar to the following:
 
 ```
-REPOSITORY                      TAG              IMAGE ID       CREATED              SIZE
-local/i2b2-core-server-demo     latest           acce652edbe4   About a minute ago   865MB
+REPOSITORY                               TAG          IMAGE ID       CREATED              SIZE
+local/i2b2-core-server-demo-postgresql   latest       c7f0e84900b0   About a minute ago   891MB
 ```
 
 ### Run the Image In a Container
 
-Execute the following command to run the image in a Docker container:
+Execute the following command to run the image ***local/i2b2-core-server-demo-postgresql*** in a Docker container named ***i2b2-core-server-demo***:
 
 ###### Linux / macOS:
 
@@ -88,7 +88,7 @@ Execute the following command to run the image in a Docker container:
 docker run -d --name=i2b2-core-server-demo \
 --network i2b2-demo-net \
 -p 9090:9090 \
-local/i2b2-core-server-demo
+local/i2b2-core-server-demo-postgresql
 ```
 
 ###### Windows:
@@ -97,5 +97,23 @@ local/i2b2-core-server-demo
 docker run -d --name=i2b2-core-server-demo ^
 --network i2b2-demo-net ^
 -p 9090:9090 ^
-local/i2b2-core-server-demo
+local/i2b2-core-server-demo-postgresql
+```
+
+### Stop the Container
+
+```
+docker stop i2b2-data-demo
+```
+
+### Delete the Container
+
+```
+docker rm i2b2-data-demo
+```
+
+### Delete the Image
+
+```
+docker rmi local/i2b2-core-server-demo-postgresql
 ```
