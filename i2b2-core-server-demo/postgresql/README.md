@@ -1,18 +1,20 @@
-# i2b2-core-server-demo (PostgreSQL 12)
+# i2b2-core-server-demo (PostgreSQL)
 
-A Docker image of the i2b2-core-server (version 1.7.12a) working with PostgreSQL database.
+A Docker image of Wildfly 17.0.1 containing i2b2 core server ([Release 1.7.12a](https://github.com/i2b2/i2b2-core-server/releases/tag/v1.7.12a.0002)) connecting to PostgreSQL database.
 
-## Ensure i2b2-demo-net Network Exists
+## Docker User-defined Bridge Network
 
-Containers need to be run on the **i2b2-demo-net** network so that they can communicate with each other.
+The container will run on a user-defined bridge network ***i2b2-demo-net***.  The user-defined bridge network provides better isolation and allows containers on the same network to communicate with each other using their container names instead of their IP addresses.
 
-To verify that network **i2b2-demo-net** exists, open up a terminal and execute the following command:
+### Ensure User-defined Bridge Network Exists
+
+To verify that the network ***i2b2-demo-net*** exists, execute the following command to list all of the Docker's networks:
 
 ```
 docker network ls
 ```
 
-You should see **i2b2-demo-net** from the output similar to this:
+The output should be similar to this:
 
 ```
 NETWORK ID     NAME            DRIVER    SCOPE
@@ -21,19 +23,21 @@ d86843421945   bridge          bridge    local
 9a82abc00473   i2b2-demo-net   bridge    local
 ```
 
-If the **i2b2-demo-net** network does not exists, execute the following command to create one:
+If ***i2b2-demo-net*** network is **not** listed, execute the following command to create it:
 
 ```
 docker network create i2b2-demo-net
 ```
 
-## Run the Prebuilt Image in a Container
+## Run the Prebuilt Image
+
+A prebuilt Docker image is provided on [Docker Hub](https://hub.docker.com/r/kvb2univpitt/i2b2-core-server-demo-postgresql).
 
 ### Prerequisites
 
-- [Docker 19.x](https://docs.docker.com/get-docker/)
+- [Docker 19 or above](https://docs.docker.com/get-docker/)
 
-A prebuilt [Docker image](https://hub.docker.com/r/kvb2univpitt/i2b2-core-server-demo-postgresql) is provided on Docker Hub.  Open up a terminal and execute the following command:
+Open up a terminal and execute the following command to download and run the prebuilt image in a container named ***i2b2-core-server-demo***.
 
 ###### Linux / macOS:
 
@@ -53,19 +57,47 @@ docker run -d --name=i2b2-core-server-demo ^
 kvb2univpitt/i2b2-core-server-demo-postgresql:v1.7.12a.2022.01
 ```
 
+### Access Service List
+
+To see the list of all the i2b2 web services, open up a web browser and go to the URL [http://localhost:9090/i2b2/services/listServices](http://localhost:9090/i2b2/services/listServices)
+
+![i2b2 core services](../../img/i2b2-core-service-list.png)
+
+### Docker Container and Image Management
+
+Execute the following to stop the running Docker container:
+
+```
+docker stop i2b2-core-server-demo
+```
+
+Execute the following to delete the Docker container:
+
+```
+docker rm i2b2-core-server-demo
+```
+
+Execute the following to delete the Docker image:
+
+```
+docker rmi kvb2univpitt/i2b2-core-server-demo-postgresql:v1.7.12a.2022.01
+```
+
 ## Build the Image
 
 ### Prerequisites
 
-- [Docker 19.x](https://docs.docker.com/get-docker/)
+- [Docker or above](https://docs.docker.com/get-docker/)
 
-Open up a terminal in the directory ***i2b2-demo/i2b2-core-server-demo/postgresql***, containing the file **Dockerfile**, and execute the following command to build the Docker image:
+### Build the Docker Image:
+
+Open up a terminal in the directory **i2b2-demo/i2b2-core-server-demo/postgresql**, where the ***Dockerfile*** file is, and execute the following command to build the image:
 
 ```
 docker build -t local/i2b2-core-server-demo-postgresql .
 ```
 
-To verify that the image has been built, execute the following command to see the list of Docker images:
+To verify that the image has been built, execute the following command to list the Docker images:
 
 ```
 docker images
@@ -75,18 +107,20 @@ The output should be similar to the following:
 
 ```
 REPOSITORY                               TAG          IMAGE ID       CREATED              SIZE
-local/i2b2-core-server-demo-postgresql   latest       c7f0e84900b0   About a minute ago   891MB
+local/i2b2-core-server-demo-postgresql   latest       9b1422eb494f   About a minute ago   891MB
+kvb2univpitt/centos7-openjdk8            v1.2022.01   d116b30583a9   2 weeks ago          597MB
 ```
 
 ### Run the Image In a Container
 
-Execute the following command to run the image ***local/i2b2-core-server-demo-postgresql*** in a Docker container named ***i2b2-core-server-demo***:
+Execute the following command the run the image in a Docker container name ***i2b2-core-server-demo*** on the user-defined bridge network ***i2b2-demo-net***:
 
 ###### Linux / macOS:
 
 ```
 docker run -d --name=i2b2-core-server-demo \
 --network i2b2-demo-net \
+-e TZ=America/New_York \
 -p 9090:9090 \
 local/i2b2-core-server-demo-postgresql
 ```
@@ -96,23 +130,39 @@ local/i2b2-core-server-demo-postgresql
 ```
 docker run -d --name=i2b2-core-server-demo ^
 --network i2b2-demo-net ^
+-e TZ=America/New_York ^
 -p 9090:9090 ^
 local/i2b2-core-server-demo-postgresql
 ```
 
-### Stop the Container
+To verify that the container is running, execute the following command to list the Docker containers:
 
 ```
-docker stop i2b2-data-demo
+docker ps
 ```
 
-### Delete the Container
+The output should be similar to the following:
 
 ```
-docker rm i2b2-data-demo
+CONTAINER ID   IMAGE                                    COMMAND                  CREATED         STATUS         PORTS                                       NAMES
+556f8a2abbe8   local/i2b2-core-server-demo-postgresql   "/opt/wildfly-17.0.1…"   5 seconds ago   Up 4 seconds   0.0.0.0:9090->9090/tcp, :::9090->9090/tcp   i2b2-core-server-demo
 ```
 
-### Delete the Image
+### Docker Container and Image Management
+
+Execute the following to stop the running Docker container:
+
+```
+docker stop i2b2-core-server-demo
+```
+
+Execute the following to delete the Docker container:
+
+```
+docker rm i2b2-core-server-demo
+```
+
+Execute the following to delete the Docker image:
 
 ```
 docker rmi local/i2b2-core-server-demo-postgresql
