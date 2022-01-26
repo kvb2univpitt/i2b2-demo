@@ -1,26 +1,20 @@
-# i2b2-data-demo (SQL Server 2017)
+# i2b2-data-demo (SQL Server)
 
-A Docker image of SQL Server 2017 database containing i2b2 demo data.
+A Docker image of SQL Server database containing i2b2 demo data ([Release 1.7.12a](https://github.com/i2b2/i2b2-data/releases/tag/v1.7.12a.0001)).
 
-## Run the Prebuilt Image
+## Docker User-defined Bridge Network
 
-A prebuilt [Docker image](https://hub.docker.com/r/kvb2univpitt/i2b2-data-demo-sqlserver) is provided to get the database up and running quickly.
+The container will run on a user-defined bridge network ***i2b2-demo-net***.  The user-defined bridge network provides better isolation and allows containers on the same network to communicate with each other using their container names instead of their IP addresses.
 
-### Prerequisites
+### Ensure User-defined Bridge Network Exists
 
-- [Docker 19.x](https://docs.docker.com/get-docker/)
-
-### Create a User-defined Bridge Network
-
-The Docker containers will run on a user-defined bridge network **i2b2-demo-net** so that they can communicate with each other using their container names instead of IP addresses.
-
-To verify that the **i2b2-demo-net** network exists, open up a terminal and execute the following command:
+To verify that the network ***i2b2-demo-net*** exists, execute the following command to list all of the Docker's networks:
 
 ```
 docker network ls
 ```
 
-You should see **i2b2-demo-net** from the output similar to this:
+The output should be similar to this:
 
 ```
 NETWORK ID     NAME            DRIVER    SCOPE
@@ -29,15 +23,21 @@ d86843421945   bridge          bridge    local
 9a82abc00473   i2b2-demo-net   bridge    local
 ```
 
-If the **i2b2-demo-net** network does not exists, execute the following command to create it:
+If ***i2b2-demo-net*** network is **not** listed, execute the following command to create it:
 
 ```
 docker network create i2b2-demo-net
 ```
 
-### Run the Prebuilt Image in a Container
+## Run the Prebuilt Image
 
-Open a terminal and execute the following command to download the prebuilt image from Docker Hub and run it in a Docker container. 
+A prebuilt Docker image is provided on [Docker Hub](https://hub.docker.com/r/kvb2univpitt/i2b2-data-demo-sqlserver).
+
+### Prerequisites
+
+- [Docker 19 or above](https://docs.docker.com/get-docker/)
+
+Open up a terminal and execute the following command to download and run the prebuilt image in a container named ***i2b2-data-demo***.
 
 ###### Linux / macOS:
 
@@ -63,20 +63,7 @@ docker run -d --name=i2b2-data-demo ^
 kvb2univpitt/i2b2-data-demo-sqlserver:v1.7.12a.2022.01
 ```
 
-The Docker image ***kvb2univpitt/i2b2-data-demo-sqlserver:v1.7.12a.2022.01*** is now running inside a Docker container named ***i2b2-data-demo***.
-
-To verify that the container is running, execute the following command:
-
-```
-docker ps
-```
-
-You should see an output similar to this:
-
-```
-CONTAINER ID   IMAGE                                                    COMMAND                  CREATED         STATUS         PORTS                                       NAMES
-d4df49a71267   kvb2univpitt/i2b2-data-demo-sqlserver:v1.7.12a.2022.01   "/bin/sh -c /opt/mss…"   6 minutes ago   Up 6 minutes   0.0.0.0:1433->1433/tcp, :::1433->1433/tcp   i2b2-data-demo
-```
+### Access the Database
 
 The database can be accessed with any database tool by using the following configurations:
 
@@ -88,28 +75,65 @@ The database can be accessed with any database tool by using the following confi
 | Username  | sa           |
 | Password  | Demouser123! |
 
-## Build the Docker Image:
+### Docker Container and Image Management
+
+Execute the following to stop the running Docker container:
+
+```
+docker stop i2b2-data-demo
+```
+
+Execute the following to delete the Docker container:
+
+```
+docker rm i2b2-data-demo
+```
+
+Execute the following to delete the Docker image:
+
+```
+docker rmi kvb2univpitt/i2b2-data-demo-sqlserver:v1.7.12a.2022.01
+```
+
+## Build the Image
 
 ### Prerequisites
 
-- [Docker 19.x](https://docs.docker.com/get-docker/)
+- [Docker or above](https://docs.docker.com/get-docker/)
 -  Java SDK 8 ([Oracle JDK](https://www.oracle.com/java/technologies/javase-downloads.html) or [OpenJDK](https://adoptopenjdk.net/))
 - [SQL Server command-line tools](https://docs.microsoft.com/en-us/sql/linux/sql-server-linux-setup-tools?view=sql-server-ver15)
 
-Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/sqlserver** where the file ***Dockerfile*** is and execute the following command:
+### Build the Docker Image:
+
+Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/sqlserver**, where the ***Dockerfile*** file is, and execute the following command to build the image:
 
 ```
 docker build -t local/i2b2-data-demo-sqlserver .
 ```
 
+To verify that the image has been built, execute the following command to list the Docker images:
+
+```
+docker images
+```
+
+The output should be similar to the following:
+
+```
+REPOSITORY                       TAG       IMAGE ID       CREATED              SIZE
+local/i2b2-data-demo-sqlserver   latest    7910804874d9   About a minute ago   2.03GB
+ubuntu                           18.04     886eca19e611   2 weeks ago          63.1MB
+```
+
 ### Run the Image In a Container
 
-Execute the command below to run SQL Server 2017 on port 1433 from the Docker image ***local/i2b2-data-demo-sqlserver*** in a Docker container named ***i2b2-data-demo***.
+Execute the following command the run the image in a Docker container name ***i2b2-data-demo*** on the user-defined bridge network ***i2b2-demo-net***:
 
 ###### Linux / macOS:
 
 ```
 docker run -d --name=i2b2-data-demo \
+--network i2b2-demo-net \
 -e MSSQL_AGENT_ENABLED=true \
 -e ACCEPT_EULA=Y \
 -e SA_PASSWORD=Demouser123! \
@@ -121,26 +145,36 @@ local/i2b2-data-demo-sqlserver
 
 ```
 docker run -d --name=i2b2-data-demo ^
+--network i2b2-demo-net ^
 -e MSSQL_AGENT_ENABLED=true ^
--e ACCEPT_EULA=Y \
+-e ACCEPT_EULA=Y ^
 -e SA_PASSWORD=Demouser123! ^
 -p 1433:1433 ^
 local/i2b2-data-demo-sqlserver
 ```
 
-### Run SQL Scripts to Setup the Database
+To verify that the container is running, execute the following command to list the Docker containers:
 
-Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/sqlserver**.
+```
+docker ps
+```
 
-#### Create Database i2b2
+The output should be similar to the following:
 
-execute the following command the run the SQL script to create a database called **i2b2**:
+```
+CONTAINER ID   IMAGE                            COMMAND                  CREATED         STATUS         PORTS                                       NAMES
+334dce6e182d   local/i2b2-data-demo-sqlserver   "/bin/sh -c /opt/mss…"   5 seconds ago   Up 4 seconds   0.0.0.0:1433->1433/tcp, :::1433->1433/tcp   i2b2-data-demo
+```
+
+### Create i2b2 Database
+
+Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/sqlserver**.  Execute the following command to run SQL Server to execute the SQL script that creates i2b2 database:
 
 ```
 sqlcmd -S localhost -U sa -P Demouser123! -i ./resources/create_database.sql -e
 ```
 
-You should see the following output:
+The output should be similar to the following:
 
 ```
 -- SQL Server
@@ -152,15 +186,15 @@ CREATE DATABASE i2b2pm;
 CREATE DATABASE i2b2workdata;
 ```
 
-#### Create Users For i2b2 Database
+### Create i2b2 Users
 
-Execute the following command
+Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/sqlserver**.  Execute the following command to run SQL Server to execute the SQL script that creates i2b2 database users:
 
 ```
 sqlcmd -S localhost -U sa -P Demouser123! -i ./resources/create_users.sql -e
 ```
 
-You should see the following output:
+The output should be similar to the following:
 
 ```
 -- SQL Server
@@ -199,15 +233,13 @@ Changed database context to 'i2b2pm'.
 Changed database context to 'i2b2workdata'.
 ```
 
-### Insert i2b2 Demo Data into the Database
+### Import the i2b2 Demo Data into the Database
 
-#### Download the i2b2 Software
-
-Download the [i2b2-data-1.7.12a.0001.zip](https://github.com/i2b2/i2b2-data/archive/refs/tags/v1.7.12a.0001.zip) and unzip the file to the directory **i2b2-demo/i2b2-data-demo/sqlserver**.
+Download the zip file [i2b2-data-1.7.12a.0001.zip](https://github.com/i2b2/i2b2-data/archive/refs/tags/v1.7.12a.0001.zip) and extract it to the directory **i2b2-demo/i2b2-data-demo/sqlserver**.
 
 #### Copy the Database Property Files to the i2b2-data Software
 
-Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/sqlserver**, where the **i2b2-data-1.7.12a.0001.zip** was extracted.  Execute the following command to copy the database property files over:
+Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/sqlserver**, where the ***i2b2-data-1.7.12a.0001.zip*** was extracted, and execute the following command to copy the database property files over:
 
 ###### Linux / macOS:
 
@@ -231,9 +263,9 @@ copy ./resources/db_configs/Pmdata/db.properties ./i2b2-data-1.7.12a.0001/edu.ha
 copy ./resources/db_configs/Workdata/db.properties ./i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/NewInstall/Workdata/
 ```
 
-#### Run the Ant Script
+#### Run the Ant Script to Import the i2b2 Demo Data
 
-Execute the following command to run the ant script to insert the i2b2 demo data into the database:
+Execute the following command to run the ant script to import the i2b2 demo data into the database:
 
 ###### Linux / macOS:
 
@@ -251,19 +283,19 @@ create_database load_demodata
 create_database load_demodata
 ```
 
-> The process should take about 20-30 minutes, depending on how fast your computer is.
+The process should take about 15-20 minutes, depending on how fast your computer is.
 
 ### Update the pm_cell_data Table
 
-As mentioned above, the Docker containers run on a user-defined bridge network **i2b2-demo-net** so that the containers can communicate with eacher using the container names.  The **pm_cell_data** table contains URLs for the web application to communicate with the **i2b2-core-server**.  The URLs need to be updated from ***localhost*** to the Docker container name ***i2b2-core-server-demo***.
+The **pm_cell_data** table contains URLs used by the i2b2 web application to communicate with the i2b2 core servers.  As mentioned above, Docker containers that run on the same Docker network communicate with eacher using their container names. The URLs need to be updated from ***localhost*** to the i2b2-core-server's container name ***i2b2-core-server-demo***.
 
-Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/sqlserver**.  Execute the following command to run PostgreSQL to execute the SQL script that updates the IP address to the container name in the **pm_cell_data** table:
+Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/sqlserver** and execute the following command to run SQL Server to execute the SQL script that updates the IP address to the container name in the **pm_cell_data** table:
 
 ```
 sqlcmd -S localhost -U sa -P Demouser123! -i ./resources/update_tables.sql -e
 ```
 
-You should see the following output:
+The output should be similar to the following:
 
 ```
 -- any request using these URLs will be proxy over to the i2b2 hives via AJP
@@ -287,25 +319,43 @@ UPDATE i2b2pm.dbo.pm_cell_data SET url = 'http://i2b2-core-server-demo:9090/i2b2
 
 ### Save the Docker Container State to the Docker Image
 
-After the i2b2 demo data has been inserted into the database, we need to persist the changes to the Docker image so that the demo data is still there when we rerun the imagine in a container.
+The changes made to the Docker container need to be saved to the Docker image so that the data is still there when the image is launched into a new container.
 
-To save the Docker container state to the Docker image, we first need the **container ID**.  Execute the following command to get the container ID:
+The container ID is required to commit the changes to the image.  Execute the following to get the container ID:
 
 ```
 docker ps
 ```
 
-The output similar to this:
+The output should be similar to the following:
 
 ```
-CONTAINER ID   IMAGE                            COMMAND                  CREATED         STATUS         PORTS                                       NAMES
-c8f5d7d22e32   local/i2b2-data-demo-sqlserver   "/bin/sh -c /opt/mss…"   6 minutes ago   Up 6 minutes   0.0.0.0:1433->1433/tcp, :::1433->1433/tcp   i2b2-data-demo
+CONTAINER ID   IMAGE                            COMMAND                  CREATED             STATUS             PORTS                                       NAMES
+334dce6e182d   local/i2b2-data-demo-sqlserver   "/bin/sh -c /opt/mss…"   About an hour ago   Up About an hour   0.0.0.0:1433->1433/tcp, :::1433->1433/tcp   i2b2-data-demo
 ```
 
-From the above example output, the container ID is ***c8f5d7d22e32***.
-
-Execute the following command to persist the container state to the image:
+The container ID is **334dce6e182d** in this example.  execute the following command to save the state of the container to the image:
 
 ```
-docker commit c8f5d7d22e32 local/i2b2-data-demo-sqlserver
+docker commit 334dce6e182d local/i2b2-data-demo-sqlserver
+```
+
+### Docker Container and Image Management
+
+Execute the following to stop the running Docker container:
+
+```
+docker stop i2b2-data-demo
+```
+
+Execute the following to delete the Docker container:
+
+```
+docker rm i2b2-data-demo
+```
+
+Execute the following to delete the Docker image:
+
+```
+docker rmi local/i2b2-data-demo-sqlserver
 ```
