@@ -4,7 +4,7 @@ A Docker image of i2b2 web client ([Release 1.7.12a](https://github.com/i2b2/i2b
 
 ## Docker User-defined Bridge Network
 
-The container will run on a user-defined bridge network ***i2b2-demo-net***.  The user-defined bridge network provides better isolation and allows containers on the same network to communicate with each other using their container names instead of their IP addresses.
+The container runs on a user-defined bridge network ***i2b2-demo-net***.  The user-defined bridge network provides better isolation and allows containers on the same network to communicate with each other using their container names instead of their IP addresses.
 
 ### Ensure User-defined Bridge Network Exists
 

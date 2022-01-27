@@ -4,7 +4,7 @@ A Docker image of SQL Server database containing i2b2 demo data ([Release 1.7.12
 
 ## Docker User-defined Bridge Network
 
-The container will run on a user-defined bridge network ***i2b2-demo-net***.  The user-defined bridge network provides better isolation and allows containers on the same network to communicate with each other using their container names instead of their IP addresses.
+The container runs on a user-defined bridge network ***i2b2-demo-net***.  The user-defined bridge network provides better isolation and allows containers on the same network to communicate with each other using their container names instead of their IP addresses.
 
 ### Ensure User-defined Bridge Network Exists
 
@@ -62,6 +62,16 @@ docker run -d --name=i2b2-data-demo ^
 -p 1433:1433 ^
 kvb2univpitt/i2b2-data-demo-sqlserver:v1.7.12a.2022.01
 ```
+
+### Application Users
+
+Below is a list of user accounts for logging into the i2b2 web client:
+
+| Username | Password |
+|----------|----------|
+| demo     | demouser |
+
+> Note that the user accounts above is not the database admin account.
 
 ### Access the Database
 
