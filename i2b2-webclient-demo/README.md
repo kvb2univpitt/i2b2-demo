@@ -1,18 +1,20 @@
 # i2b2-webclient-demo
 
-A Docker image of i2b2-webclient (version 1.7.12a) demo.
+A Docker image of i2b2 web client ([Release 1.7.12a](https://github.com/i2b2/i2b2-webclient/releases/tag/v1.7.12a.0002)).
 
-## Ensure i2b2-demo-net Network Exists
+## Docker User-defined Bridge Network
 
-Containers need to be run on the **i2b2-demo-net** network so that they can communicate with each other.
+The container will run on a user-defined bridge network ***i2b2-demo-net***.  The user-defined bridge network provides better isolation and allows containers on the same network to communicate with each other using their container names instead of their IP addresses.
 
-To verify that network **i2b2-demo-net** exists, open up a terminal and execute the following command:
+### Ensure User-defined Bridge Network Exists
+
+To verify that the network ***i2b2-demo-net*** exists, execute the following command to list all of the Docker's networks:
 
 ```
 docker network ls
 ```
 
-You should see **i2b2-demo-net** from the output similar to this:
+The output should be similar to this:
 
 ```
 NETWORK ID     NAME            DRIVER    SCOPE
@@ -21,53 +23,97 @@ d86843421945   bridge          bridge    local
 9a82abc00473   i2b2-demo-net   bridge    local
 ```
 
-If the **i2b2-demo-net** network does not exists, execute the following command to create one:
+If ***i2b2-demo-net*** network is **not** listed, execute the following command to create it:
 
 ```
 docker network create i2b2-demo-net
 ```
 
-## Run the Prebuilt Image in a Container
+## Run the Prebuilt Image
+
+A prebuilt Docker image is provided on [Docker Hub](https://hub.docker.com/r/kvb2univpitt/i2b2-webclient-demo).
 
 ### Prerequisites
 
-- [Docker 19.x](https://docs.docker.com/get-docker/)
+- [Docker 19 or above](https://docs.docker.com/get-docker/)
 
-A prebuilt [Docker image](https://hub.docker.com/r/kvb2univpitt/i2b2-webclient-demo) is provided on Docker Hub.  Open up a terminal and execute the following command:
+Open up a terminal and execute the following command to download and run the prebuilt image in a container named ***i2b2-data-demo***.
 
 ###### Linux / macOS:
 
 ```
-docker run -d --name=i2b2-webclient-demo \
+docker run -d \
+--name=i2b2-webclient-demo \
 --network i2b2-demo-net \
 -p 80:80 -p 443:443 \
-kvb2univpitt/i2b2-webclient-demo:v1.2021.10
+kvb2univpitt/i2b2-webclient-demo:v1.7.12a.2022.01
 ```
 
 ###### Windows:
 
 ```
-docker run -d --name=i2b2-webclient-demo ^
+docker run -d ^
+--name=i2b2-webclient-demo ^
 --network i2b2-demo-net ^
 -p 80:80 -p 443:443 ^
-kvb2univpitt/i2b2-webclient-demo:v1.2021.10
+kvb2univpitt/i2b2-webclient-demo:v1.7.12a.2022.01
 ```
 
-The above command will run the i2b2-webclient on port 80 (http) and port 443 (https).
+### Access the Web Client
 
+Open up a web browser and go to the URL [https://localhost/webclient/](https://localhost/webclient/).
+
+The browser will show a security warning because the SSL certificates are ***not*** signed and validated by a trusted Certificate Authority (CA).  Click "Accept the Risk and Continue"
+
+![SSL Warning Page](../img/ssl_warning.png)
+
+The browser will show the login page, as shown below.  Log in with the following credentials:
+
+| Attribute | Value    |
+|-----------|----------|
+| Username  | demo     |
+| Password  | demouser |
+
+![Login Page](../img/login_page.png)
+
+Once logged in, the main page will show like the one below:
+
+![Main Page](../img/main_page.png)
+
+### Docker Container and Image Management
+
+Execute the following to stop the running Docker container:
+
+```
+docker stop i2b2-webclient-demo
+```
+
+Execute the following to delete the Docker container:
+
+```
+docker rm i2b2-webclient-demo
+```
+
+Execute the following to delete the Docker image:
+
+```
+docker rmi kvb2univpitt/i2b2-webclient-demo:v1.7.12a.2022.01
+```
 ## Build the Image
 
 ### Prerequisites
 
-- [Docker 19.x](https://docs.docker.com/get-docker/)
+- [Docker or above](https://docs.docker.com/get-docker/)
 
-Open up a terminal in the folder ***i2b2-webclient-demo***, containing the file **Dockerfile**, and execute the following command:
+### Build the Docker Image:
+
+Open up a terminal in the directory **i2b2-demo/i2b2-webclient-demo**, where the ***Dockerfile*** file is, and execute the following command to build the image:
 
 ```
 docker build -t local/i2b2-webclient-demo .
 ```
 
-To verify that the image has been buit, execute the following command:
+To verify that the image has been built, execute the following command to list the Docker images:
 
 ```
 docker images
@@ -76,13 +122,14 @@ docker images
 The output should be similar to the following:
 
 ```
-REPOSITORY                           TAG              IMAGE ID       CREATED             SIZE
-local/i2b2-webclient-demo            v1.2021.10        d12cc0f781d5   4 minutes ago       451MB
+REPOSITORY                  TAG          IMAGE ID       CREATED          SIZE
+local/i2b2-webclient-demo   latest       de79feaaa0ca   43 seconds ago   924MB
+kvb2univpitt/centos7-php    v1.2022.01   2d412beb7609   2 weeks ago      875MB
 ```
 
-### Run the Image In the Container
+### Run the Image In a Container
 
-Execute the following command to run the image in a Docker container:
+Execute the following command the run the image in a Docker container name ***i2b2-webclient-demo*** on the user-defined bridge network ***i2b2-demo-net***:
 
 ###### Linux / macOS:
 
@@ -102,12 +149,35 @@ docker run -d --name=i2b2-webclient-demo ^
 local/i2b2-webclient-demo
 ```
 
-### Access the Application
+To verify that the container is running, execute the following command to list the Docker containers:
 
-Launch a web browser and type in the following URL:
+```
+docker ps
+```
 
-[http://localhost/webclient/](http://localhost/webclient/)
+The output should be similar to the following:
 
-For SSL, type the following URL:
+```
+CONTAINER ID   IMAGE                       COMMAND                  CREATED         STATUS         PORTS                                                                      NAMES
+43b0c8211dd4   local/i2b2-webclient-demo   "/usr/sbin/httpd -D …"   3 seconds ago   Up 2 seconds   0.0.0.0:80->80/tcp, :::80->80/tcp, 0.0.0.0:443->443/tcp, :::443->443/tcp   i2b2-webclient-demo
+```
 
-[https://localhost/webclient/](https://localhost/webclient/)
+### Docker Container and Image Management
+
+Execute the following to stop the running Docker container:
+
+```
+docker stop i2b2-webclient-demo
+```
+
+Execute the following to delete the Docker container:
+
+```
+docker rm i2b2-webclient-demo
+```
+
+Execute the following to delete the Docker image:
+
+```
+docker rmi local/i2b2-webclient-demo
+```
