@@ -1,4 +1,4 @@
-FROM kvb2univpitt/centos7-php:v1.2021.10
+FROM kvb2univpitt/centos7-php:v1.2022.01
 
 LABEL maintainer="Kevin Bui"
 
