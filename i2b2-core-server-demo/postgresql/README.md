@@ -1,6 +1,6 @@
 # i2b2-core-server-demo (PostgreSQL)
 
-A Docker image of Wildfly 17.0.1 containing i2b2 core server ([Release 1.7.12a](https://github.com/i2b2/i2b2-core-server/releases/tag/v1.7.12a.0002)) connecting to PostgreSQL database.
+A Docker image of Wildfly 17.0.1 containing i2b2 core server ([Release 1.7.12a](https://github.com/i2b2/i2b2-core-server/releases/tag/v1.7.12a.0002)) connecting to PostgreSQL database for demonstration purposes.
 
 ## Docker User-defined Bridge Network
 

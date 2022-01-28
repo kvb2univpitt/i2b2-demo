@@ -1,6 +1,6 @@
 # i2b2-data-demo (PostgreSQL)
 
-A Docker image of PostgreSQL database containing i2b2 demo data ([Release 1.7.12a](https://github.com/i2b2/i2b2-data/releases/tag/v1.7.12a.0001)).
+A Docker image of PostgreSQL database containing i2b2 demo data ([Release 1.7.12a](https://github.com/i2b2/i2b2-data/releases/tag/v1.7.12a.0001)) for demonstration purposes.
 
 ## Docker User-defined Bridge Network
 

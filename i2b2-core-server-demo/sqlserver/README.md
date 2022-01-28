@@ -1,6 +1,6 @@
 # i2b2-core-server-demo (SQL Server)
 
-A Docker image of Wildfly 17.0.1 containing i2b2 core server ([Release 1.7.12a](https://github.com/i2b2/i2b2-core-server/releases/tag/v1.7.12a.0002)) connecting to SQL Server database.
+A Docker image of Wildfly 17.0.1 containing i2b2 core server ([Release 1.7.12a](https://github.com/i2b2/i2b2-core-server/releases/tag/v1.7.12a.0002)) connecting to SQL Server database for demonstration purposes.
 
 ## Docker User-defined Bridge Network
 
