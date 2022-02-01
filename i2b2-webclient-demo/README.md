@@ -37,7 +37,7 @@ A prebuilt Docker image is provided on [Docker Hub](https://hub.docker.com/r/kvb
 
 - [Docker 19 or above](https://docs.docker.com/get-docker/)
 
-Open up a terminal and execute the following command to download and run the prebuilt image in a container named ***i2b2-data-demo***.
+Open up a terminal and execute the following command to download and run the prebuilt image in a container named ***i2b2-webclient-demo***.
 
 ###### Linux / macOS:
 
