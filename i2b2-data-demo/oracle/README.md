@@ -222,11 +222,11 @@ Disconnected from Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit
 
 ### Import the i2b2 Demo Data into the Database
 
-Download the zip file [i2b2-data-1.7.12a.0001.zip](https://github.com/i2b2/i2b2-data/archive/refs/tags/v1.7.12a.0001.zip) and extract it to the directory **i2b2-demo/i2b2-data-demo/postgresql**.
+Download the zip file [i2b2-data-1.7.12a.0001.zip](https://github.com/i2b2/i2b2-data/archive/refs/tags/v1.7.12a.0001.zip) and extract it to the directory **i2b2-demo/i2b2-data-demo/oracle**.
 
 #### Copy the Database Property Files to the i2b2-data Software
 
-Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/postgresql**, where the ***i2b2-data-1.7.12a.0001.zip*** was extracted, and execute the following command to copy the database property files over:
+Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/oracle**, where the ***i2b2-data-1.7.12a.0001.zip*** was extracted, and execute the following command to copy the database property files over:
 
 ###### Linux / macOS:
 
@@ -276,7 +276,7 @@ The process should take about 15-20 minutes, depending on how fast your computer
 
 The **pm_cell_data** table contains URLs used by the i2b2 web application to communicate with the i2b2 core servers.  As mentioned above, Docker containers that run on the same Docker network communicate with eacher using their container names. The URLs need to be updated from ***localhost*** to the i2b2-core-server's container name ***i2b2-core-server-demo***.
 
-Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/postgresql** and execute the following command to run Oracle client to execute the SQL script that updates the IP address to the container name in the **pm_cell_data** table:
+Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/oracle** and execute the following command to run Oracle client to execute the SQL script that updates the IP address to the container name in the **pm_cell_data** table:
 
 ```
 sqlplus system/demouser@localhost:1521/xe @./resources/update_tables.sql
