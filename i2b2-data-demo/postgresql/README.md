@@ -1,6 +1,6 @@
 # i2b2-data-demo (PostgreSQL)
 
-A Docker image of PostgreSQL database containing i2b2 demo data ([Release 1.7.12a](https://github.com/i2b2/i2b2-data/releases/tag/v1.7.12a.0001)) for demonstration purposes.
+A Docker image of PostgreSQL database containing the i2b2 demo data ([Release 1.7.13](https://github.com/i2b2/i2b2-data/releases/tag/v1.7.12a.0001)) for demonstration purposes.
 
 ## Docker User-defined Bridge Network
 
@@ -29,83 +29,11 @@ If ***i2b2-demo-net*** network is **not** listed, execute the following command 
 docker network create i2b2-demo-net
 ```
 
-## Run the Prebuilt Image
-
-A prebuilt Docker image is provided on [Docker Hub](https://hub.docker.com/r/kvb2univpitt/i2b2-data-demo-postgresql).
-
-### Prerequisites
-
-- [Docker 19 or above](https://docs.docker.com/get-docker/)
-
-Open up a terminal and execute the following command to download and run the prebuilt image in a container named ***i2b2-data-demo***.
-
-###### Linux / macOS:
-
-```
-docker run -d --name=i2b2-data-demo \
---network i2b2-demo-net \
--e POSTGRESQL_ADMIN_PASSWORD=demouser \
--p 5432:5432 \
-kvb2univpitt/i2b2-data-demo-postgresql:v1.7.12a.2022.01
-```
-
-###### Windows:
-
-```
-docker run -d --name=i2b2-data-demo ^
---network i2b2-demo-net ^
--e POSTGRESQL_ADMIN_PASSWORD=demouser ^
--p 5432:5432 ^
-kvb2univpitt/i2b2-data-demo-postgresql:v1.7.12a.2022.01
-```
-
-### Application Users
-
-Below is a list of user accounts for logging into the i2b2 web client:
-
-| Username | Password |
-|----------|----------|
-| demo     | demouser |
-
-> Note that the user accounts above is not the database admin account.
-
-### Access the Database
-
-The database can be accessed with any database tool by using the following configurations:
-
-| Attribute | Value     |
-|-----------|-----------|
-| Host      | localhost |
-| Port      | 5432      |
-| Database  | i2b2      |
-| Username  | postgres  |
-| Password  | demouser  |
-
-### Docker Container and Image Management
-
-Execute the following to stop the running Docker container:
-
-```
-docker stop i2b2-data-demo
-```
-
-Execute the following to delete the Docker container:
-
-```
-docker rm i2b2-data-demo
-```
-
-Execute the following to delete the Docker image:
-
-```
-docker rmi kvb2univpitt/i2b2-data-demo-postgresql:v1.7.12a.2022.01
-```
-
 ## Build the Image
 
 ### Prerequisites
 
-- [Docker or above](https://docs.docker.com/get-docker/)
+- [Docker version 20 or above](https://docs.docker.com/get-docker/)
 -  Java SDK 8 ([Oracle JDK](https://www.oracle.com/java/technologies/javase-downloads.html) or [OpenJDK](https://adoptopenjdk.net/))
 - [PostgreSQL](https://www.postgresql.org/download/)
 
@@ -127,8 +55,9 @@ The output should be similar to the following:
 
 ```
 REPOSITORY                        TAG       IMAGE ID       CREATED          SIZE
-local/i2b2-data-demo-postgresql   latest    4c546df14d6e   12 seconds ago   548MB
-centos/postgresql-12-centos7      latest    ead3e66c2b54   6 months ago     372MB
+REPOSITORY                        TAG       IMAGE ID       CREATED              SIZE
+local/i2b2-data-demo-postgresql   latest    c181ced1b685   About a minute ago   633MB
+centos/postgresql-13-centos7      latest    da9fdbcba636   10 months ago        423MB
 ```
 
 ### Run the Image In a Container
@@ -166,7 +95,7 @@ The output should be similar to the following:
 
 ```
 CONTAINER ID   IMAGE                             COMMAND                  CREATED         STATUS         PORTS                                       NAMES
-63f266b49b44   local/i2b2-data-demo-postgresql   "container-entrypoin…"   6 seconds ago   Up 5 seconds   0.0.0.0:5432->5432/tcp, :::5432->5432/tcp   i2b2-data-demo
+43d1bc5c57fd   local/i2b2-data-demo-postgresql   "container-entrypoin…"   8 seconds ago   Up 7 seconds   0.0.0.0:5432->5432/tcp, :::5432->5432/tcp   i2b2-data-demo
 ```
 
 ### Create i2b2 Database and Users
@@ -271,14 +200,14 @@ docker ps
 The output should be similar to the following:
 
 ```
-CONTAINER ID   IMAGE                             COMMAND                  CREATED         STATUS         PORTS                                       NAMES
-63f266b49b44   local/i2b2-data-demo-postgresql   "container-entrypoin…"   6 seconds ago   Up 5 seconds   0.0.0.0:5432->5432/tcp, :::5432->5432/tcp   i2b2-data-demo
+CONTAINER ID   IMAGE                             COMMAND                  CREATED          STATUS          PORTS                                       NAMES
+43d1bc5c57fd   local/i2b2-data-demo-postgresql   "container-entrypoin…"   47 minutes ago   Up 47 minutes   0.0.0.0:5432->5432/tcp, :::5432->5432/tcp   i2b2-data-demo
 ```
 
-The container ID is **63f266b49b44** in this example.  execute the following command to save the state of the container to the image:
+The container ID is **43d1bc5c57fd** in this example.  execute the following command to save the state of the container to the image:
 
 ```
-docker commit 63f266b49b44 local/i2b2-data-demo-postgresql
+docker commit 43d1bc5c57fd local/i2b2-data-demo-postgresql
 ```
 
 ### Docker Container and Image Management

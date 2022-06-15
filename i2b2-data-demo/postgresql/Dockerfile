@@ -1,4 +1,4 @@
-FROM centos/postgresql-12-centos7
+FROM centos/postgresql-13-centos7
 
 LABEL maintainer="Kevin Bui"
 
