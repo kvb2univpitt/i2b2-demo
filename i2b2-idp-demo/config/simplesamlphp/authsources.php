@@ -6,6 +6,15 @@ $config = array(
     ),
     'example-userpass' => array(
         'exampleauth:UserPass',
+        'demo:demouser' => array(
+            'uid' => array('demo'),
+            'eduPersonPrincipalName' => 'demo@i2b2.org',
+            'eduPersonAffiliation' => array('staff'),
+            'mail' => 'demo@i2b2.org',
+            'givenName' => 'i2b2 SimpleSAML',
+            'sn' => 'Demo User',
+            'displayName' => 'i2b2 SimpleSAML Demo User'
+        ),
         'lex:luthor' => array(
             'uid' => array('lex'),
             'eduPersonPrincipalName' => 'lex@lexcorp.com',

@@ -249,6 +249,26 @@ create_database load_demodata
 
 The process should take about 15-20 minutes, depending on how fast your computer is.
 
+### Add Additional Web Client User Accounts
+
+The database currently has the following user account for logging into the web client:
+
+| Username              | Password | Type  |
+|-----------------------|----------|-------|
+| demo                  | demouser | local |
+
+The following additional user accounts will be added to the database for ***federated login*** using **SimpleSAMLphp**:
+
+| Username              | Password | Type  |
+|-----------------------|----------|-------|
+| demo                  | demouser | SAML  |
+
+Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/postgresql** and execute the following command to run PostgreSQL to execute the SQL script that adds additional user accounts:
+
+```
+psql postgresql://postgres:demouser@localhost:5432/i2b2 -f ./resources/add_simplesaml_users.sql
+```
+
 ### Update the pm_cell_data Table
 
 The **pm_cell_data** table contains URLs used by the i2b2 web application to communicate with the i2b2 core servers.  As mentioned above, Docker containers that run on the same Docker network communicate with eacher using their container names. The URLs need to be updated from ***localhost*** to the i2b2-core-server's container name ***i2b2-core-server-demo***.
