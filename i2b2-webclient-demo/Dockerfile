@@ -4,8 +4,8 @@ LABEL maintainer="Kevin Bui"
 
 COPY resources/bin/startup.sh /usr/local/bin/
 
-COPY v1.7.12a.0002.zip /tmp
-# RUN curl -s -L -o /tmp/v1.7.12a.0002.zip https://github.com/i2b2/i2b2-webclient/archive/v1.7.12a.0002.zip
+# COPY v1.7.12a.0002.zip /tmp
+RUN curl -s -L -o /tmp/v1.7.12a.0002.zip https://github.com/i2b2/i2b2-webclient/archive/v1.7.12a.0002.zip
 RUN unzip /tmp/v1.7.12a.0002.zip -d /var/www/html/ \
     && mv /var/www/html/i2b2-webclient-1.7.12a.0002 /var/www/html/webclient \
     && rm -f /tmp/v1.7.12a.0002.zip
