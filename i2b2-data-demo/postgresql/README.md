@@ -29,6 +29,78 @@ If ***i2b2-demo-net*** network is **not** listed, execute the following command 
 docker network create i2b2-demo-net
 ```
 
+## Run the Prebuilt Image
+
+A prebuilt Docker image is provided on [Docker Hub](https://hub.docker.com/r/kvb2univpitt/i2b2-data-demo-postgresql).
+
+### Prerequisites
+
+- [Docker 19 or above](https://docs.docker.com/get-docker/)
+
+Open up a terminal and execute the following command to download and run the prebuilt image in a container named ***i2b2-data-demo***.
+
+###### Linux / macOS:
+
+```
+docker run -d --name=i2b2-data-demo \
+--network i2b2-demo-net \
+-e POSTGRESQL_ADMIN_PASSWORD=demouser \
+-p 5432:5432 \
+kvb2univpitt/i2b2-data-demo-postgresql:v1.7.13.2022.06
+```
+
+###### Windows:
+
+```
+docker run -d --name=i2b2-data-demo ^
+--network i2b2-demo-net ^
+-e POSTGRESQL_ADMIN_PASSWORD=demouser ^
+-p 5432:5432 ^
+kvb2univpitt/i2b2-data-demo-postgresql:v1.7.13.2022.06
+```
+
+### Application Users
+
+Below is a list of user accounts for logging into the i2b2 web client:
+
+| Username | Password |
+|----------|----------|
+| demo     | demouser |
+
+> Note that the user accounts above is not the database admin account.
+
+### Access the Database
+
+The database can be accessed with any database tool by using the following configurations:
+
+| Attribute | Value     |
+|-----------|-----------|
+| Host      | localhost |
+| Port      | 5432      |
+| Database  | i2b2      |
+| Username  | postgres  |
+| Password  | demouser  |
+
+### Docker Container and Image Management
+
+Execute the following to stop the running Docker container:
+
+```
+docker stop i2b2-data-demo
+```
+
+Execute the following to delete the Docker container:
+
+```
+docker rm i2b2-data-demo
+```
+
+Execute the following to delete the Docker image:
+
+```
+docker rmi kvb2univpitt/i2b2-data-demo-postgresql:v1.7.13.2022.06
+```
+
 ## Build the Image
 
 ### Prerequisites
