@@ -61,11 +61,14 @@ kvb2univpitt/i2b2-data-demo-postgresql:v1.7.13.2022.06
 
 ### Application Users
 
-Below is a list of user accounts for logging into the i2b2 web client:
+Below is a list of user accounts pre-populated in the database:
 
-| Username | Password |
-|----------|----------|
-| demo     | demouser |
+| Username            | Password | Account Type  | Login Type |
+|---------------------|----------|---------------|------------|
+| i2b2                | demouser | admin/manager | local      |
+| AGG_SERVICE_ACCOUNT | demouser | manager       | local      |
+| demo                | demouser | user          | local      |
+| demo@i2b2.org       |          | user          | federated  |
 
 > Note that the user accounts above is not the database admin account.
 
@@ -80,6 +83,8 @@ The database can be accessed with any database tool by using the following confi
 | Database  | i2b2      |
 | Username  | postgres  |
 | Password  | demouser  |
+
+> Note that the user accounts above is the database admin account.
 
 ### Docker Container and Image Management
 
@@ -126,7 +131,6 @@ docker images
 The output should be similar to the following:
 
 ```
-REPOSITORY                        TAG       IMAGE ID       CREATED          SIZE
 REPOSITORY                        TAG       IMAGE ID       CREATED              SIZE
 local/i2b2-data-demo-postgresql   latest    c181ced1b685   About a minute ago   633MB
 centos/postgresql-13-centos7      latest    da9fdbcba636   10 months ago        423MB
@@ -249,25 +253,27 @@ create_database load_demodata
 
 The process should take about 15-20 minutes, depending on how fast your computer is.
 
-### Add Additional Web Client User Accounts
+### Add Additional User Accounts For Federated Login
 
-The database currently has the following user account for logging into the web client:
+Currently, the database has the following user account pre-populated:
 
-| Username              | Password | Type  |
-|-----------------------|----------|-------|
-| demo                  | demouser | local |
+| Username            | Password | Account Type  | Login Type |
+|---------------------|----------|---------------|------------|
+| i2b2                | demouser | admin/manager | local      |
+| AGG_SERVICE_ACCOUNT | demouser | manager       | local      |
+| demo                | demouser | user          | local      |
 
-The following additional user accounts will be added to the database for ***federated login*** using **SimpleSAMLphp**:
-
-| Username              | Password | Type  |
-|-----------------------|----------|-------|
-| demo                  | demouser | SAML  |
-
-Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/postgresql** and execute the following command to run PostgreSQL to execute the SQL script that adds additional user accounts:
+Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/postgresql** and execute the following command to populate additional user account in the database for federated login:
 
 ```
 psql postgresql://postgres:demouser@localhost:5432/i2b2 -f ./resources/add_simplesaml_users.sql
 ```
+
+The following user accounts was added in database:
+
+| Username            | Password | Account Type  | Login Type |
+|---------------------|----------|---------------|------------|
+| demo@i2b2.org       |          | user          | federated  |
 
 ### Update the pm_cell_data Table
 
