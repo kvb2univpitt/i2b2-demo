@@ -1,6 +1,6 @@
 # i2b2-webclient-demo
 
-A Docker image of i2b2 web client ([Release 1.7.12a](https://github.com/i2b2/i2b2-webclient/releases/tag/v1.7.12a.0002)) for demonstration purposes.
+A Docker image of i2b2 web client ([Release 1.7.13](https://github.com/i2b2/i2b2-webclient/releases/tag/v1.7.13.0002)) for demonstration purposes.
 
 ## Docker User-defined Bridge Network
 

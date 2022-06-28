@@ -1,6 +1,6 @@
 # i2b2-data-demo (PostgreSQL)
 
-A Docker image of PostgreSQL database containing the i2b2 demo data ([Release 1.7.13](https://github.com/i2b2/i2b2-data/releases/tag/v1.7.12a.0001)) for demonstration purposes.
+A Docker image of PostgreSQL database containing the i2b2 demo data ([Release 1.7.13](https://github.com/i2b2/i2b2-data/releases/tag/v1.7.13.0002)) for demonstration purposes.
 
 ## Docker User-defined Bridge Network
 
@@ -203,32 +203,32 @@ GRANT
 
 ### Import the i2b2 Demo Data into the Database
 
-Download the zip file [i2b2-data-1.7.12a.0001.zip](https://github.com/i2b2/i2b2-data/archive/refs/tags/v1.7.12a.0001.zip) and extract it to the directory **i2b2-demo/i2b2-data-demo/postgresql**.
+Download the zip file [i2b2-data-1.7.13.0002.zip](https://github.com/i2b2/i2b2-data/archive/refs/tags/v1.7.13.0002.zip) and extract it to the directory **i2b2-demo/i2b2-data-demo/postgresql**.
 
 #### Copy the Database Property Files to the i2b2-data Software
 
-Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/postgresql**, where the ***i2b2-data-1.7.12a.0001.zip*** was extracted, and execute the following command to copy the database property files over:
+Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/postgresql**, where the ***i2b2-data-1.7.13.0002.zip*** was extracted, and execute the following command to copy the database property files over:
 
 ###### Linux / macOS:
 
 ```
-cp ./resources/db_configs/Crcdata/db.properties ./i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/NewInstall/Crcdata/
-cp ./resources/db_configs/Hivedata/db.properties ./i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/NewInstall/Hivedata/
-cp ./resources/db_configs/Imdata/db.properties ./i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/NewInstall/Imdata/
-cp ./resources/db_configs/Metadata/db.properties ./i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/NewInstall/Metadata/
-cp ./resources/db_configs/Pmdata/db.properties ./i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/NewInstall/Pmdata/
-cp ./resources/db_configs/Workdata/db.properties ./i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/NewInstall/Workdata/
+cp ./resources/db_configs/Crcdata/db.properties ./i2b2-data-1.7.13.0002/edu.harvard.i2b2.data/Release_1-7/NewInstall/Crcdata/
+cp ./resources/db_configs/Hivedata/db.properties ./i2b2-data-1.7.13.0002/edu.harvard.i2b2.data/Release_1-7/NewInstall/Hivedata/
+cp ./resources/db_configs/Imdata/db.properties ./i2b2-data-1.7.13.0002/edu.harvard.i2b2.data/Release_1-7/NewInstall/Imdata/
+cp ./resources/db_configs/Metadata/db.properties ./i2b2-data-1.7.13.0002/edu.harvard.i2b2.data/Release_1-7/NewInstall/Metadata/
+cp ./resources/db_configs/Pmdata/db.properties ./i2b2-data-1.7.13.0002/edu.harvard.i2b2.data/Release_1-7/NewInstall/Pmdata/
+cp ./resources/db_configs/Workdata/db.properties ./i2b2-data-1.7.13.0002/edu.harvard.i2b2.data/Release_1-7/NewInstall/Workdata/
 ```
 
 ###### Windows:
 
 ```
-copy ./resources/db_configs/Crcdata/db.properties ./i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/NewInstall/Crcdata/
-copy ./resources/db_configs/Hivedata/db.properties ./i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/NewInstall/Hivedata/
-copy ./resources/db_configs/Imdata/db.properties ./i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/NewInstall/Imdata/
-copy ./resources/db_configs/Metadata/db.properties ./i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/NewInstall/Metadata/
-copy ./resources/db_configs/Pmdata/db.properties ./i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/NewInstall/Pmdata/
-copy ./resources/db_configs/Workdata/db.properties ./i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/NewInstall/Workdata/
+copy ./resources/db_configs/Crcdata/db.properties ./i2b2-data-1.7.13.0002/edu.harvard.i2b2.data/Release_1-7/NewInstall/Crcdata/
+copy ./resources/db_configs/Hivedata/db.properties ./i2b2-data-1.7.13.0002/edu.harvard.i2b2.data/Release_1-7/NewInstall/Hivedata/
+copy ./resources/db_configs/Imdata/db.properties ./i2b2-data-1.7.13.0002/edu.harvard.i2b2.data/Release_1-7/NewInstall/Imdata/
+copy ./resources/db_configs/Metadata/db.properties ./i2b2-data-1.7.13.0002/edu.harvard.i2b2.data/Release_1-7/NewInstall/Metadata/
+copy ./resources/db_configs/Pmdata/db.properties ./i2b2-data-1.7.13.0002/edu.harvard.i2b2.data/Release_1-7/NewInstall/Pmdata/
+copy ./resources/db_configs/Workdata/db.properties ./i2b2-data-1.7.13.0002/edu.harvard.i2b2.data/Release_1-7/NewInstall/Workdata/
 ```
 
 #### Run the Ant Script to Import the i2b2 Demo Data
@@ -238,16 +238,16 @@ Execute the following command to run the ant script to import the i2b2 demo data
 ###### Linux / macOS:
 
 ```
-./i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/apache-ant/bin/ant \
--f ./i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/NewInstall/build.xml \
+./i2b2-data-1.7.13.0002/edu.harvard.i2b2.data/Release_1-7/apache-ant/bin/ant \
+-f ./i2b2-data-1.7.13.0002/edu.harvard.i2b2.data/Release_1-7/NewInstall/build.xml \
 create_database load_demodata
 ```
 
 ###### Windows:
 
 ```
-./i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/apache-ant/bin/ant ^
--f ./i2b2-data-1.7.12a.0001/edu.harvard.i2b2.data/Release_1-7/NewInstall/build.xml ^
+./i2b2-data-1.7.13.0002/edu.harvard.i2b2.data/Release_1-7/apache-ant/bin/ant ^
+-f ./i2b2-data-1.7.13.0002/edu.harvard.i2b2.data/Release_1-7/NewInstall/build.xml ^
 create_database load_demodata
 ```
 
