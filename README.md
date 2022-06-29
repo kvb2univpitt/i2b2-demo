@@ -64,14 +64,12 @@ kvb2univpitt/i2b2-data-demo-postgresql:v1.7.13.2022.06
 
 docker run -d --name=i2b2-core-server-demo \
 --network i2b2-demo-net \
--e TZ=America/New_York \
 -p 9090:9090 \
 kvb2univpitt/i2b2-core-server-demo-postgresql:v1.7.13.2022.06
 
 docker run -d \
 --name=i2b2-webclient-demo \
 --network i2b2-demo-net \
--e TZ=America/New_York \
 -p 80:80 -p 443:443 \
 kvb2univpitt/i2b2-webclient-demo:v1.7.13.2022.06
 ```
@@ -94,14 +92,62 @@ kvb2univpitt/i2b2-data-demo-postgresql:v1.7.13.2022.06
 
 docker run -d --name=i2b2-core-server-demo ^
 --network i2b2-demo-net ^
--e TZ=America/New_York ^
 -p 9090:9090 ^
 kvb2univpitt/i2b2-core-server-demo-postgresql:v1.7.13.2022.06
 
 docker run -d ^
 --name=i2b2-webclient-demo ^
 --network i2b2-demo-net ^
--e TZ=America/New_York ^
 -p 80:80 -p 443:443 ^
 kvb2univpitt/i2b2-webclient-demo:v1.7.13.2022.06
 ```
+
+### Access the Web Client
+
+Open up a web browser and go to the URL [https://localhost/webclient/](https://localhost/webclient/).
+
+The browser will show a security warning because the SSL certificates are ***not*** signed and validated by a trusted Certificate Authority (CA).  Click "Accept the Risk and Continue"
+
+![SSL Warning Page](./img/ssl_warning.png)
+
+#### Login with Local Account
+
+By default, local login (Local Demo) is selected, as shown below:
+
+![Login Page](./img/login_page.png)
+
+Log in with the following credentials:
+
+| Attribute | Value    |
+|-----------|----------|
+| Username  | demo     |
+| Password  | demouser |
+
+Once logged in, the landing page will appear like the one below:
+
+![Main Page](./img/main_page.png)
+
+#### Login with Federated Account
+
+Click on the dropdown box **i2b2 Host** and select ***SAML Demo*** option.  The login dialog will change to federated login as shown below:
+
+![SAML Login Page](./img/saml_login_page.png)
+
+Click on the login button ***Sign In With SimpleSAMLphp***.  The page will be redircted to **SimpleSAMLphp** login page.  The browser will show a security warning because the SSL certificates are ***not*** signed and validated by a trusted Certificate Authority (CA).
+
+![SMAL SSL Warning Page](./img/saml_ssl_warning.png)
+
+Click "Accept the Risk and Continue" and the SimpleSAMLphp login page will appear.
+
+Log in with the following credentials:
+
+| Attribute | Value    |
+|-----------|----------|
+| Username  | demo     |
+| Password  | demouser |
+
+![SAML IdP Login Page](./img/saml_idp_login_page.png)
+
+Once logged in, the landing page will appear like the one below:
+
+![SAML Main Page](./img/saml_main_page.png)
