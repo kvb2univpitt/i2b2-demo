@@ -4,7 +4,7 @@
                 pool-name="CRCBootStrapDS" enabled="true" use-ccm="false">
         <connection-url>jdbc:postgresql://i2b2-data-demo:5432/i2b2</connection-url>
         <driver-class>org.postgresql.Driver</driver-class>
-        <driver>postgresql-42.2.8.jar</driver>
+        <driver>postgresql-42.3.2.jar</driver>
         <security>
             <user-name>i2b2hive</user-name>
             <password>demouser</password>
@@ -25,7 +25,7 @@
                 pool-name="QueryToolDemoDS" enabled="true" use-ccm="false">
         <connection-url>jdbc:postgresql://i2b2-data-demo:5432/i2b2</connection-url>
         <driver-class>org.postgresql.Driver</driver-class>
-        <driver>postgresql-42.2.8.jar</driver>
+        <driver>postgresql-42.3.2.jar</driver>
         <security>
             <user-name>i2b2demodata</user-name>
             <password>demouser</password>

@@ -1,6 +1,6 @@
 # i2b2-webclient-demo
 
-A Docker image of i2b2 web client ([Release 1.7.12a](https://github.com/i2b2/i2b2-webclient/releases/tag/v1.7.12a.0002)) for demonstration purposes.
+A Docker image of i2b2 web client ([Release 1.7.13](https://github.com/i2b2/i2b2-webclient/releases/tag/v1.7.13.0002)) for demonstration purposes.
 
 ## Docker User-defined Bridge Network
 
@@ -45,8 +45,9 @@ Open up a terminal and execute the following command to download and run the pre
 docker run -d \
 --name=i2b2-webclient-demo \
 --network i2b2-demo-net \
+-e TZ=America/New_York \
 -p 80:80 -p 443:443 \
-kvb2univpitt/i2b2-webclient-demo:v1.7.12a.2022.01
+kvb2univpitt/i2b2-webclient-demo:v1.7.13.2022.06
 ```
 
 ###### Windows:
@@ -55,8 +56,9 @@ kvb2univpitt/i2b2-webclient-demo:v1.7.12a.2022.01
 docker run -d ^
 --name=i2b2-webclient-demo ^
 --network i2b2-demo-net ^
+-e TZ=America/New_York ^
 -p 80:80 -p 443:443 ^
-kvb2univpitt/i2b2-webclient-demo:v1.7.12a.2022.01
+kvb2univpitt/i2b2-webclient-demo:v1.7.13.2022.06
 ```
 
 ### Access the Web Client
@@ -97,7 +99,7 @@ docker rm i2b2-webclient-demo
 Execute the following to delete the Docker image:
 
 ```
-docker rmi kvb2univpitt/i2b2-webclient-demo:v1.7.12a.2022.01
+docker rmi kvb2univpitt/i2b2-webclient-demo:v1.7.13.2022.06
 ```
 ## Build the Image
 

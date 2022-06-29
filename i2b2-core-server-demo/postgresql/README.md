@@ -1,6 +1,6 @@
 # i2b2-core-server-demo (PostgreSQL)
 
-A Docker image of Wildfly 17.0.1 containing i2b2 core server ([Release 1.7.12a](https://github.com/i2b2/i2b2-core-server/releases/tag/v1.7.12a.0002)) connecting to PostgreSQL database for demonstration purposes.
+A Docker image of Wildfly 17.0.1 server running i2b2-core-server ([Release 1.7.13](https://github.com/i2b2/i2b2-core-server/releases/tag/v1.7.13.0002)) connecting to PostgreSQL database.
 
 ## Docker User-defined Bridge Network
 
@@ -44,8 +44,9 @@ Open up a terminal and execute the following command to download and run the pre
 ```
 docker run -d --name=i2b2-core-server-demo \
 --network i2b2-demo-net \
+-e TZ=America/New_York \
 -p 9090:9090 \
-kvb2univpitt/i2b2-core-server-demo-postgresql:v1.7.12a.2022.01
+kvb2univpitt/i2b2-core-server-demo-postgresql:v1.7.13.2022.06
 ```
 
 ###### Windows:
@@ -53,8 +54,9 @@ kvb2univpitt/i2b2-core-server-demo-postgresql:v1.7.12a.2022.01
 ```
 docker run -d --name=i2b2-core-server-demo ^
 --network i2b2-demo-net ^
+-e TZ=America/New_York ^
 -p 9090:9090 ^
-kvb2univpitt/i2b2-core-server-demo-postgresql:v1.7.12a.2022.01
+kvb2univpitt/i2b2-core-server-demo-postgresql:v1.7.13.2022.06
 ```
 
 ### Access Service List
@@ -80,7 +82,7 @@ docker rm i2b2-core-server-demo
 Execute the following to delete the Docker image:
 
 ```
-docker rmi kvb2univpitt/i2b2-core-server-demo-postgresql:v1.7.12a.2022.01
+docker rmi kvb2univpitt/i2b2-core-server-demo-postgresql:v1.7.13.2022.06
 ```
 
 ## Build the Image
