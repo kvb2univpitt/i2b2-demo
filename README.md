@@ -9,11 +9,28 @@ The following software are preinstalled:
 - i2b2 Web Client [Release 1.7.13](https://github.com/i2b2/i2b2-webclient/archive/refs/tags/v1.7.13.0002.zip)
 - SimpleSAMLphp [Release 1.19.5](https://github.com/simplesamlphp/simplesamlphp/releases/download/v1.19.5/simplesamlphp-1.19.5.tar.gz)
 
-## Docker User-defined Bridge Network
+## Local and Federated Authentication
+
+The new version of i2b2 (Release 1.7.13) now supports federated authentication.  Users can choose to log into the i2b2 webclient using their i2b2 local account (local login) or use thier login account from a supported third-party (federated login).  This i2b2 Docker demo provides both local login and federated login using SimpleSAMLphp as a demo indentity provider (IdP).
+
+<figure>
+    <img src = "./img/auth_flow.png" />
+    <figcaption align="center">
+        <b>Fig. 1 - i2b2 Webclient Authentication Flow</b>
+    </figcaption>
+</figure>
+
+## Run the i2b2 Demo
+
+### Prerequisites
+
+- [Docker 19 or above](https://docs.docker.com/get-docker/)
+
+### Docker User-defined Bridge Network
 
 The containers run on a user-defined bridge network ***i2b2-demo-net***.  The user-defined bridge network provides better isolation and allows containers on the same network to communicate with each other using their container names instead of their IP addresses.
 
-### Ensure User-defined Bridge Network Exists
+#### Ensure User-defined Bridge Network Exists
 
 To verify that the network ***i2b2-demo-net*** exists, execute the following command to list all of the Docker's networks:
 
@@ -36,13 +53,7 @@ If ***i2b2-demo-net*** network is **not** listed, execute the following command 
 docker network create i2b2-demo-net
 ```
 
-## Run the i2b2 Demo
-
-### Prerequisites
-
-- [Docker 19 or above](https://docs.docker.com/get-docker/)
-
-#### Run Demo
+### Run Demo
 
 Open up a terminal and execute the following commands to download and run the prebuilt images:
 
