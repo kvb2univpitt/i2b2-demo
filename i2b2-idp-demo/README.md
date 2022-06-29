@@ -36,11 +36,11 @@ The IdP contains the following user accounts:
 
 ## Docker User-defined Bridge Network
 
-The container runs on a user-defined bridge network ***i2b2-saml-demo-net***.  The user-defined bridge network provides better isolation and allows containers on the same network to communicate with each other using their container names instead of their IP addresses.
+The container runs on a user-defined bridge network ***i2b2-demo-net***.  The user-defined bridge network provides better isolation and allows containers on the same network to communicate with each other using their container names instead of their IP addresses.
 
 ### Ensure User-defined Bridge Network Exists
 
-To verify that the network ***i2b2-saml-demo-net*** exists, execute the following command to list all of the Docker's networks:
+To verify that the network ***i2b2-demo-net*** exists, execute the following command to list all of the Docker's networks:
 
 ```
 docker network ls
@@ -52,13 +52,13 @@ The output should be similar to this:
 NETWORK ID     NAME                 DRIVER    SCOPE
 9ea1de540506   bridge               bridge    local
 bf7e75025889   host                 host      local
-88a9b525113e   i2b2-saml-demo-net   bridge    local
+88a9b525113e   i2b2-demo-net   bridge    local
 ```
 
-If ***i2b2-saml-demo-net*** network is **not** listed, execute the following command to create it:
+If ***i2b2-demo-net*** network is **not** listed, execute the following command to create it:
 
 ```
-docker network create i2b2-saml-demo-net
+docker network create i2b2-demo-net
 ```
 
 ## Run the Prebuilt Image
@@ -75,7 +75,7 @@ Open up a terminal and execute the following command to download and run the pre
 
 ```
 docker run -d --name=i2b2-idp-demo \
---network i2b2-saml-demo-net \
+--network i2b2-demo-net \
 -p 8080:8080 \
 -p 8443:8443 \
 -e SIMPLESAMLPHP_ADMIN_PASSWORD=demouser \
@@ -86,7 +86,7 @@ kvb2univpitt/i2b2-idp-demo:v1.7.13.2022.06
 
 ```
 docker run -d --name=i2b2-idp-demo ^
---network i2b2-saml-demo-net ^
+--network i2b2-demo-net ^
 -p 8080:8080 ^
 -p 8443:8443 ^
 -e SIMPLESAMLPHP_ADMIN_PASSWORD=demouser ^
@@ -152,13 +152,13 @@ php                        7.4.27-apache   4d3d9fe4d89c   6 days ago       469MB
 
 ### Run the Image In a Container
 
-Execute the following command the run the image in a Docker container name ***i2b2-idp-demo*** on the user-defined bridge network ***i2b2-saml-demo-net***:
+Execute the following command the run the image in a Docker container name ***i2b2-idp-demo*** on the user-defined bridge network ***i2b2-demo-net***:
 
 ###### Linux / macOS:
 
 ```
 docker run -d --name=i2b2-idp-demo \
---network i2b2-saml-demo-net \
+--network i2b2-demo-net \
 -p 8080:8080 \
 -p 8443:8443 \
 -e SIMPLESAMLPHP_ADMIN_PASSWORD=demouser \
@@ -169,7 +169,7 @@ local/i2b2-idp-demo
 
 ```
 docker run -d --name=i2b2-idp-demo ^
---network i2b2-saml-demo-net ^
+--network i2b2-demo-net ^
 -p 8080:8080 ^
 -p 8443:8443 ^
 -e SIMPLESAMLPHP_ADMIN_PASSWORD=demouser ^

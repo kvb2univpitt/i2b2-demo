@@ -50,7 +50,7 @@ Open up a terminal and execute the following commands to download and run the pr
 
 ```
 docker run -d --name=i2b2-idp-demo \
---network i2b2-saml-demo-net \
+--network i2b2-demo-net \
 -p 8080:8080 \
 -p 8443:8443 \
 -e SIMPLESAMLPHP_ADMIN_PASSWORD=demouser \
@@ -80,7 +80,7 @@ kvb2univpitt/i2b2-webclient-demo:v1.7.13.2022.06
 
 ```
 docker run -d --name=i2b2-idp-demo ^
---network i2b2-saml-demo-net ^
+--network i2b2-demo-net ^
 -p 8080:8080 ^
 -p 8443:8443 ^
 -e SIMPLESAMLPHP_ADMIN_PASSWORD=demouser ^
