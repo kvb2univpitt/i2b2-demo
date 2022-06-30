@@ -4,10 +4,10 @@ A collection of Docker images preinstalled with [i2b2 software](https://www.i2b2
 
 The following software are preinstalled:
 
-- i2b2 Data [Release 1.7.13](https://github.com/i2b2/i2b2-data/archive/refs/tags/v1.7.13.0002.zip)
-- i2b2 Core Server [Release 1.7.13](https://github.com/i2b2/i2b2-core-server/archive/refs/tags/v1.7.13.0002.zip)
-- i2b2 Web Client [Release 1.7.13](https://github.com/i2b2/i2b2-webclient/archive/refs/tags/v1.7.13.0002.zip)
-- SimpleSAMLphp [Release 1.19.5](https://github.com/simplesamlphp/simplesamlphp/releases/download/v1.19.5/simplesamlphp-1.19.5.tar.gz)
+- i2b2 Data [Release 1.7.13](https://github.com/i2b2/i2b2-data/releases/tag/v1.7.13.0002)
+- i2b2 Core Server [Release 1.7.13](https://github.com/i2b2/i2b2-core-server/releases/tag/v1.7.13.0002)
+- i2b2 Web Client [Release 1.7.13](https://github.com/i2b2/i2b2-webclient/releases/tag/v1.7.13.0002)
+- SimpleSAMLphp [Release 1.19.5](https://github.com/simplesamlphp/simplesamlphp/releases/tag/v1.19.5)
 
 ## Local and Federated Authentication
 
