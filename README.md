@@ -11,7 +11,7 @@ The following software are preinstalled:
 
 ## Local and Federated Authentication
 
-The new version of i2b2 (Release 1.7.13) now supports federated authentication.  Users can choose to log into the i2b2 webclient using their i2b2 local account (local login) or use thier login account from a supported third-party (federated login).  This i2b2 Docker demo provides both local login and federated login using SimpleSAMLphp as a demo indentity provider (IdP).
+The new version of i2b2 (Release 1.7.13) now supports federated authentication.  Users can choose to log into the i2b2 webclient using their i2b2 local account (local login) or use their login account from a supported third-party identity provider (federated login).  The i2b2 Docker demo includes both local login and federated login.  SimpleSAMLphp is setup as a demo identity provider (IdP).
 
 <figure>
     <img src = "./img/auth_flow.png" />
@@ -26,6 +26,14 @@ The new version of i2b2 (Release 1.7.13) now supports federated authentication. 
 
 - [Docker 19 or above](https://docs.docker.com/get-docker/)
 
+### Prebuilt Docker Container Images
+
+Prebuilt Docker container images have been created demonstration purposes:
+
+- [i2b2-idp-demo](https://hub.docker.com/r/kvb2univpitt/i2b2-idp-demo)
+- [i2b2-data-demo](https://hub.docker.com/r/kvb2univpitt/i2b2-data-demo-postgresql)
+- [i2b2-core-server-demo](https://hub.docker.com/r/kvb2univpitt/i2b2-core-server-demo-postgresql)
+- [i2b2-webclient-demo](https://hub.docker.com/r/kvb2univpitt/i2b2-webclient-demo)
 ### Docker User-defined Bridge Network
 
 The containers run on a user-defined bridge network ***i2b2-demo-net***.  The user-defined bridge network provides better isolation and allows containers on the same network to communicate with each other using their container names instead of their IP addresses.
@@ -55,7 +63,7 @@ docker network create i2b2-demo-net
 
 ### Run Demo
 
-Open up a terminal and execute the following commands to download and run the prebuilt images:
+Open up a terminal and execute the following commands to download and run the prebuilt Docker container images:
 
 ###### Linux / macOS:
 
