@@ -79,7 +79,7 @@ docker run -d --name=i2b2-idp-demo \
 -p 8080:8080 \
 -p 8443:8443 \
 -e SIMPLESAMLPHP_ADMIN_PASSWORD=demouser \
-kvb2univpitt/i2b2-idp-demo:v1.8.0.2024.01
+kvb2univpitt/i2b2-idp-demo:v1.7.13.2022.06
 ```
 
 ###### Windows:
@@ -90,7 +90,7 @@ docker run -d --name=i2b2-idp-demo ^
 -p 8080:8080 ^
 -p 8443:8443 ^
 -e SIMPLESAMLPHP_ADMIN_PASSWORD=demouser ^
-kvb2univpitt/i2b2-idp-demo:v1.8.0.2024.01
+kvb2univpitt/i2b2-idp-demo:v1.7.13.2022.06
 ```
 
 ### Access the Identity Provider (IdP)
