@@ -1,0 +1,27 @@
+{
+    "urlProxy": "proxy.php",
+    "urlFramework": "js-i2b2/",
+    "lstDomains": [
+        {
+            "domain": "i2b2demo",
+            "name": "Local Demo",
+            "urlCellPM": "http://127.0.0.1/i2b2/services/PMService/",
+            "allowAnalysis": true,
+            "debug": false
+        },
+        {
+            "domain": "i2b2demo",
+            "name": "SAML Demo",
+            "urlCellPM": "http://127.0.0.1/i2b2/services/PMService/",
+            "allowAnalysis": true,
+            "debug": false,
+            "saml": {
+                "shibboleth": {
+                    "redirect": "saml-redirect.php",
+                    "logout": "saml-logout.php"
+                }
+            }
+        }
+    ],
+    "loginTimeout": 5
+}
