@@ -24,7 +24,8 @@ The new version of i2b2 (Release 1.8.1) supports federated authentication.  User
 
 ### Prerequisites
 
-- [Docker 19 or above](https://docs.docker.com/get-docker/)
+- [Docker 19.0 or above](https://docs.docker.com/get-docker/)
+- [Docker Compose 2.0 or above](https://docs.docker.com/compose/)
 
 ### Prebuilt Docker Container Images
 
@@ -61,7 +62,35 @@ If ***i2b2-demo-net*** network is **not** listed, execute the following command 
 docker network create i2b2-demo-net
 ```
 
-### Run Demo
+### Run Demo With Docker Compose
+
+Open up a terminal and execute the following commands to download and run the prebuilt Docker container images:
+
+#### Run Containers
+
+###### Windows / Linux / macOS:
+
+```
+docker compose up
+```
+
+#### Stop Containers
+
+###### Windows / Linux / macOS:
+
+```
+docker compose stop
+```
+
+#### Remove Containers
+
+###### Windows / Linux / macOS:
+
+```
+docker compose down
+```
+
+### Run Demo Without Docker Compose
 
 Open up a terminal and execute the following commands to download and run the prebuilt Docker container images:
 
