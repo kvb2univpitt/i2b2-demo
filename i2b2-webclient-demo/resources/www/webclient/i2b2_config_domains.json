@@ -5,14 +5,14 @@
         {
             "domain": "i2b2demo",
             "name": "Local Demo",
-            "urlCellPM": "http://127.0.0.1/i2b2/services/PMService/",
+            "urlCellPM": "http://localhost:9090/i2b2/services/PMService/",
             "allowAnalysis": true,
             "debug": false
         },
         {
             "domain": "i2b2demo",
             "name": "SAML Demo",
-            "urlCellPM": "http://127.0.0.1/i2b2/services/PMService/",
+            "urlCellPM": "http://localhost:9090/i2b2/services/PMService/",
             "allowAnalysis": true,
             "debug": false,
             "saml": {

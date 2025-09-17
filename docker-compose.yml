@@ -1,6 +1,6 @@
 services:
   i2b2-data-demo:
-    image: kvb2univpitt/i2b2-data-demo-postgresql:v1.8.1.2024.06
+    image: kvb2univpitt/i2b2-data-demo-postgresql:v1.8.1a.2025.09
     environment:
       - POSTGRESQL_ADMIN_PASSWORD=demouser
     container_name: i2b2-data-demo
@@ -9,7 +9,7 @@ services:
     ports:
       - 5432:5432
   i2b2-core-server-demo:
-    image: kvb2univpitt/i2b2-core-server-demo-postgresql:v1.8.1.2024.06
+    image: kvb2univpitt/i2b2-core-server-demo-postgresql:v1.8.1a.2025.09
     container_name: i2b2-core-server-demo
     networks:
       - i2b2-demo-net
@@ -18,7 +18,7 @@ services:
     ports:
       - 9090:9090
   i2b2-webclient-demo:
-    image: kvb2univpitt/i2b2-webclient-demo:v1.8.1.2024.06
+    image: kvb2univpitt/i2b2-webclient-demo:v1.8.1a.2025.09
     container_name: i2b2-webclient-demo
     networks:
       - i2b2-demo-net
