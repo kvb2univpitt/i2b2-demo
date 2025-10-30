@@ -8,4 +8,4 @@ INSERT INTO pm_project_user_roles (project_id,user_id,user_role_cd,entry_date,st
 INSERT INTO pm_project_user_roles (project_id,user_id,user_role_cd,entry_date,status_cd) VALUES ('Demo','demo@i2b2.org','EDITOR',current_timestamp,'A');
 INSERT INTO pm_project_user_roles (project_id,user_id,user_role_cd,entry_date,status_cd) VALUES ('Demo','demo@i2b2.org','DATA_PROT',current_timestamp,'A');
 
-INSERT INTO pm_user_params (datatype_cd,user_id,param_name_cd,value,entry_date,status_cd) VALUES ('T','demo@i2b2.org','authentication_method','SAML',current_timestamp,'A');
+INSERT INTO pm_user_params (datatype_cd,user_id,param_name_cd,"value",entry_date,status_cd) VALUES ('T','demo@i2b2.org','authentication_method','SAML',current_timestamp,'A');

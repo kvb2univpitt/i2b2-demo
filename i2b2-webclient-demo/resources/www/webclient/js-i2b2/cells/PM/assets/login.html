@@ -1,47 +1,38 @@
 <!DOCTYPE html>
 <html>
-<body>
-<div id="PM-login-modal" class="modal">
-    <form class="modal-content">
-        <div class="container" style="background-color:#f1f1f1; font-weight: bold; font-size: 15px;"><div>i2b2 Login</div></div>
-        <div class="imgcontainer">
-            <img src="assets/images/logo.png" alt="i2b2 transmart logo" class="logo">
+    <body>
+        <div id="PM-login-modal" class="modal">
+            <form class="modal-content" method="post">
+                <div class="container" style="background-color:#f1f1f1; font-weight: bold; font-size: 15px;"><div>i2b2 Login</div></div>
+                <div class="imgcontainer">
+                    <img src="assets/images/logo.png" alt="i2b2 transmart logo" class="logo">
+                </div>
+                <div class="container">
+                    <div class="form-group">
+                        <label for="logindomain"><b>i2b2 Host</b></label>
+                        <select class="form-select" id="logindomain">
+                            <option value="0">Loading...</option>
+                        </select>
+                    </div>
+                    <div class="form-group login-user">
+                        <label for="loginusr"><b>Username</b></label>
+                        <input type="text" placeholder="Enter Username" name="loginusr" id="loginusr" required class="form-control">
+                    </div>
+                    <div class="form-group login-password">
+                        <label for="loginpass"><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" name="loginpass" id="loginpass" required class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm login-button">Login</button>
+                    <a class="btn sso-button btn-sm" data-service="okta" style="display: none" tabindex="0">
+                        <img src="assets/images/sso/okta.png" />
+                        <div>Sign in with Okta</div>
+                    </a>
+                    <a class="btn sso-button btn-sm" data-service="shibboleth" style="display: none" tabindex="0">
+                        <img src="assets/images/sso/shibboleth.png" />
+                        <div>Sign in with Shibboleth</div>
+                    </a>
+                </div>
+            </form>
         </div>
-
-        <div class="container">
-            <div class="form-group">
-                <label for="logindomain"><b>i2b2 Host</b></label>
-                <select class="form-select" id="logindomain">
-                    <option value="0">Loading...</option>
-                </select>
-            </div>
-
-
-            <div class="form-group login-user">
-                <label for="loginusr"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="loginusr" id="loginusr" required class="form-control">
-            </div>
-            <div class="form-group login-password">
-                <label for="loginpass"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="loginpass" id="loginpass" required class="form-control">
-            </div>
-
-            <button type="submit" class="btn btn-primary btn-sm login-button">Login</button>
-
-            <a class="btn sso-button btn-sm" data-service="okta" style="display: none" tabindex="0">
-                <img src="assets/images/sso/okta.png" />
-                <div>Sign in with Okta</div>
-            </a>
-            <a class="btn sso-button btn-sm" data-service="shibboleth" style="display: none" tabindex="0">
-                <img src="assets/images/sso/shibboleth.png" />
-                <div>Sign in with Shibboleth</div>
-            </a>
-
-        </div>
-
-        <div class="container" style="background-color:#f1f1f1"></div>
-    </form>
-</div>
-
-</body>
+    </body>
 </html>

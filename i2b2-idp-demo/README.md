@@ -4,7 +4,7 @@ A Docker image of identity provider (IdP) for demonstration purposes.
 
 The following platforms are used:
 
-- The official [PHP7 Apache](https://hub.docker.com/_/php/) docker image.
+- The official [PHP8 Apache](https://hub.docker.com/_/php/) docker image.
 - [SimpleSAMLphp](https://simplesamlphp.org/)
 
 ### SAML Attributes
@@ -27,12 +27,9 @@ Below is a table containing the user details associated with the SAML attributes
 
 The IdP contains the following user accounts:
 
-| Username    | Password  | UID         | NetID                 | Affiliation | Email                 | First Name | Last Name | Preferred Name      |
-|-------------|-----------|-------------|-----------------------|-------------|-----------------------|------------|-----------|---------------------|
-| lex         | luthor    | lex         | lex@lexcorp.com       | staff       | lex@lexcorp.com       | Alexander  | Luthor    | Lex Luthor          |
-| ckent       | superman  | ckent       | ckent@dailyplanet.com | staff       | ckent@dailyplanet.com | Clark      | Kent      | Clark Kent (Kal-El) |
-| karadanvers | supergirl | karadanvers | karadanvers@catco.com | staff       | karadanvers@catco.com | Kara       | Danvers   | Kara Zor-El         |
-| clarkkent   | superman  | clarkkent   | clarkkent@catco.com   | staff       | clarkkent@catco.com   | Clark      | Kent      | Kal-El              |
+| Username | Password | UID  | NetID         | Affiliation | Email         | First Name      | Last Name | Preferred Name            |
+|----------|----------|------|---------------|-------------|---------------|-----------------|-----------|---------------------------|
+| demo     | demouser | demo | demo@i2b2.org | staff       | demo@i2b2.org | i2b2 SimpleSAML | Demo User | i2b2 SimpleSAML Demo User |
 
 ## Docker User-defined Bridge Network
 
@@ -52,7 +49,7 @@ The output should be similar to this:
 NETWORK ID     NAME                 DRIVER    SCOPE
 9ea1de540506   bridge               bridge    local
 bf7e75025889   host                 host      local
-88a9b525113e   i2b2-demo-net   bridge    local
+88a9b525113e   i2b2-demo-net        bridge    local
 ```
 
 If ***i2b2-demo-net*** network is **not** listed, execute the following command to create it:
@@ -67,7 +64,7 @@ A prebuilt Docker image is provided on [Docker Hub](https://hub.docker.com/r/kvb
 
 ### Prerequisites
 
-- [Docker 19 or above](https://docs.docker.com/get-docker/)
+- [Docker 28 or above](https://docs.docker.com/get-docker/)
 
 Open up a terminal and execute the following command to download and run the prebuilt image in a container named ***i2b2-idp-demo***.
 
@@ -79,7 +76,8 @@ docker run -d --name=i2b2-idp-demo \
 -p 8080:8080 \
 -p 8443:8443 \
 -e SIMPLESAMLPHP_ADMIN_PASSWORD=demouser \
-kvb2univpitt/i2b2-idp-demo:v1.7.13.2022.06
+-e SIMPLESAMLPHP_SECRET_SALT=saltydemouser \
+kvb2univpitt/i2b2-idp-demo:v2.4.3.2025.10
 ```
 
 ###### Windows:
@@ -90,14 +88,15 @@ docker run -d --name=i2b2-idp-demo ^
 -p 8080:8080 ^
 -p 8443:8443 ^
 -e SIMPLESAMLPHP_ADMIN_PASSWORD=demouser ^
-kvb2univpitt/i2b2-idp-demo:v1.7.13.2022.06
+-e SIMPLESAMLPHP_SECRET_SALT=saltydemouser ^
+kvb2univpitt/i2b2-idp-demo:v2.4.3.2025.10
 ```
 
 ### Access the Identity Provider (IdP)
 
-Open up a web browser and go to the URL [http://localhost:8080/simplesaml](http://localhost:8080/simplesaml).
+Open up a web browser and go to [https://localhost:8443/simplesaml](https://localhost:8443/simplesaml).
 
-To configure the IdP, [sign in](http://localhost:8080/simplesaml/module.php/core/login-admin.php?ReturnTo=http%3A%2F%2Flocalhost%3A8080%2Fsimplesaml%2Fmodule.php%2Fcore%2Ffrontpage_federation.php) using the following admin credentials:
+To configure the IdP, go to [https://localhost:8443/simplesaml/admin](https://localhost:8443/simplesaml/admin) and sign in using the following admin credentials:
 
 | Username | Password |
 |----------|----------|
@@ -120,13 +119,13 @@ docker rm i2b2-idp-demo
 Execute the following to delete the Docker image:
 
 ```
-docker rmi kvb2univpitt/i2b2-idp-demo:v1.8.0.2024.01
+docker rmi kvb2univpitt/i2b2-idp-demo:v2.4.3.2025.10
 ```
 ## Build the Image
 
 ### Prerequisites
 
-- [Docker or above](https://docs.docker.com/get-docker/)
+- [Docker 28 or above](https://docs.docker.com/get-docker/)
 
 ### Build the Docker Image:
 
@@ -145,9 +144,8 @@ docker images
 The output should be similar to the following:
 
 ```
-REPOSITORY                 TAG             IMAGE ID       CREATED          SIZE
-local/i2b2-idp-demo   latest          82611c5d3ede   18 seconds ago   566MB
-php                        7.4.27-apache   4d3d9fe4d89c   6 days ago       469MB
+REPOSITORY            TAG              IMAGE ID       CREATED        SIZE
+local/i2b2-idp-demo   v2.4.3.2025.10   6008a181a735   12 hours ago   698MB
 ```
 
 ### Run the Image In a Container
@@ -162,6 +160,7 @@ docker run -d --name=i2b2-idp-demo \
 -p 8080:8080 \
 -p 8443:8443 \
 -e SIMPLESAMLPHP_ADMIN_PASSWORD=demouser \
+-e SIMPLESAMLPHP_SECRET_SALT=saltydemouser \
 local/i2b2-idp-demo
 ```
 
@@ -173,6 +172,7 @@ docker run -d --name=i2b2-idp-demo ^
 -p 8080:8080 ^
 -p 8443:8443 ^
 -e SIMPLESAMLPHP_ADMIN_PASSWORD=demouser ^
+-e SIMPLESAMLPHP_SECRET_SALT=saltydemouser ^
 local/i2b2-idp-demo
 ```
 

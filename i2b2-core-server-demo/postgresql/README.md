@@ -1,6 +1,6 @@
 # i2b2-core-server-demo (PostgreSQL)
 
-A Docker image of Wildfly 17.0.1 server running i2b2-core-server ([Release 1.8.1a](https://github.com/i2b2/i2b2-core-server/releases/tag/v1.8.1a.0001)) connecting to PostgreSQL database.
+A Docker image of Wildfly 37.0.1 server running i2b2-core-server ([Release 1.8.2](https://github.com/i2b2/i2b2-core-server/releases/tag/v1.8.2)) connecting to PostgreSQL database.
 
 ## Docker User-defined Bridge Network
 
@@ -35,7 +35,7 @@ A prebuilt Docker image is provided on [Docker Hub](https://hub.docker.com/r/kvb
 
 ### Prerequisites
 
-- [Docker 19 or above](https://docs.docker.com/get-docker/)
+- [Docker 28 or above](https://docs.docker.com/get-docker/)
 
 Open up a terminal and execute the following command to download and run the prebuilt image in a container named ***i2b2-core-server-demo***.
 
@@ -46,7 +46,7 @@ docker run -d --name=i2b2-core-server-demo \
 --network i2b2-demo-net \
 -e TZ=America/New_York \
 -p 9090:9090 \
-kvb2univpitt/i2b2-core-server-demo-postgresql:v1.8.1a.2025.09
+kvb2univpitt/i2b2-core-server-demo-postgresql:v1.8.2.2025.10
 ```
 
 ###### Windows:
@@ -56,7 +56,7 @@ docker run -d --name=i2b2-core-server-demo ^
 --network i2b2-demo-net ^
 -e TZ=America/New_York ^
 -p 9090:9090 ^
-kvb2univpitt/i2b2-core-server-demo-postgresql:v1.8.1a.2025.09
+kvb2univpitt/i2b2-core-server-demo-postgresql:v1.8.2.2025.10
 ```
 
 ### Access Service List
@@ -82,14 +82,14 @@ docker rm i2b2-core-server-demo
 Execute the following to delete the Docker image:
 
 ```
-docker rmi kvb2univpitt/i2b2-core-server-demo-postgresql:v1.8.1a.2025.09
+docker rmi kvb2univpitt/i2b2-core-server-demo-postgresql:v1.8.2.2025.10
 ```
 
 ## Build the Image
 
 ### Prerequisites
 
-- [Docker or above](https://docs.docker.com/get-docker/)
+- [Docker 28 or above](https://docs.docker.com/get-docker/)
 
 ### Build the Docker Image:
 
@@ -110,7 +110,6 @@ The output should be similar to the following:
 ```
 REPOSITORY                               TAG          IMAGE ID       CREATED              SIZE
 local/i2b2-core-server-demo-postgresql   latest       9b1422eb494f   About a minute ago   891MB
-kvb2univpitt/centos7-openjdk8            v1.2022.01   d116b30583a9   2 weeks ago          597MB
 ```
 
 ### Run the Image In a Container

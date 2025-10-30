@@ -1,6 +1,6 @@
 # i2b2-data-demo (PostgreSQL)
 
-A Docker image of PostgreSQL database containing the i2b2 demo data ([Release 1.8.1a](https://github.com/i2b2/i2b2-data/releases/tag/v1.8.1a.0001)) for demonstration purposes.
+A Docker image of PostgreSQL database containing the i2b2 demo data ([Release 1.8.2](https://github.com/i2b2/i2b2-data/releases/tag/v1.8.2)) for demonstration purposes.
 
 ## Docker User-defined Bridge Network
 
@@ -35,7 +35,7 @@ A prebuilt Docker image is provided on [Docker Hub](https://hub.docker.com/r/kvb
 
 ### Prerequisites
 
-- [Docker 19 or above](https://docs.docker.com/get-docker/)
+- [Docker 28 or above](https://docs.docker.com/get-docker/)
 
 Open up a terminal and execute the following command to download and run the prebuilt image in a container named ***i2b2-data-demo***.
 
@@ -46,7 +46,7 @@ docker run -d --name=i2b2-data-demo \
 --network i2b2-demo-net \
 -e POSTGRESQL_ADMIN_PASSWORD=demouser \
 -p 5432:5432 \
-kvb2univpitt/i2b2-data-demo-postgresql:v1.8.1a.2025.09
+kvb2univpitt/i2b2-data-demo-postgresql:v1.8.2.2025.10
 ```
 
 ###### Windows:
@@ -56,7 +56,7 @@ docker run -d --name=i2b2-data-demo ^
 --network i2b2-demo-net ^
 -e POSTGRESQL_ADMIN_PASSWORD=demouser ^
 -p 5432:5432 ^
-kvb2univpitt/i2b2-data-demo-postgresql:v1.8.1a.2025.09
+kvb2univpitt/i2b2-data-demo-postgresql:v1.8.2.2025.10
 ```
 
 ### Application Users
@@ -103,15 +103,15 @@ docker rm i2b2-data-demo
 Execute the following to delete the Docker image:
 
 ```
-docker rmi kvb2univpitt/i2b2-data-demo-postgresql:v1.8.1a.2025.09
+docker rmi kvb2univpitt/i2b2-data-demo-postgresql:v1.8.2.2025.10
 ```
 
 ## Build the Image
 
 ### Prerequisites
 
-- [Docker version 20 or above](https://docs.docker.com/get-docker/)
--  Java SDK 8 ([Oracle JDK](https://www.oracle.com/java/technologies/javase-downloads.html) or [OpenJDK](https://adoptopenjdk.net/))
+- [Docker version 28 or above](https://docs.docker.com/get-docker/)
+-  Java SDK 17 ([Oracle JDK](https://www.oracle.com/java/technologies/javase-downloads.html) or [OpenJDK](https://learn.microsoft.com/en-us/java/openjdk/download))
 - [PostgreSQL](https://www.postgresql.org/download/)
 
 ### Build the Docker Image:
@@ -123,9 +123,10 @@ Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/postgresql** and 
 ```
 docker run -d --name=i2b2-data-demo \
 --network i2b2-demo-net \
--e POSTGRESQL_ADMIN_PASSWORD=demouser \
+-e POSTGRES_PASSWORD=demouser \
+-e PGDATA=/var/lib/postgresql/pgdata \
 -p 5432:5432 \
-centos/postgresql-13-centos7
+postgres:14.19-alpine3.22
 ```
 
 ###### Windows:
@@ -133,9 +134,10 @@ centos/postgresql-13-centos7
 ```
 docker run -d --name=i2b2-data-demo ^
 --network i2b2-demo-net ^
--e POSTGRESQL_ADMIN_PASSWORD=demouser ^
+-e POSTGRES_PASSWORD=demouser ^
+-e PGDATA=/var/lib/postgresql/pgdata ^
 -p 5432:5432 ^
-centos/postgresql-13-centos7
+postgres:14.19-alpine3.22
 ```
 
 To verify that the container is running, execute the following command to list the Docker containers:
@@ -147,8 +149,8 @@ docker ps
 The output should be similar to the following:
 
 ```
-CONTAINER ID   IMAGE                          COMMAND                  CREATED         STATUS         PORTS                                         NAMES
-68c2b80e1f4b   centos/postgresql-13-centos7   "container-entrypoin…"   4 seconds ago   Up 3 seconds   0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp   i2b2-data-demo
+CONTAINER ID   IMAGE                       COMMAND                  CREATED         STATUS         PORTS                                         NAMES
+28640240d7c9   postgres:14.19-alpine3.22   "docker-entrypoint.s…"   6 seconds ago   Up 5 seconds   0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp   i2b2-data-demo
 ```
 
 ### Create i2b2 Database and Users
@@ -180,8 +182,7 @@ GRANT
 
 ### Import the i2b2 Demo Data into the Database
 
-Download the zip file [i2b2-data-1.8.1a.0001.zip](https://github.com/i2b2/i2b2-data/archive/refs/tags/v1.8.1a.0001.zip
-) and extract it to the directory **i2b2-demo/i2b2-data-demo/postgresql**.
+Download the zip file [i2b2-data-1.8.2.zip](https://github.com/i2b2/i2b2-data/archive/refs/tags/v1.8.2.zip) and extract it to the directory **i2b2-demo/i2b2-data-demo/postgresql**.
 
 #### Copy the Database Property Files to the i2b2-data Software
 
@@ -190,23 +191,23 @@ Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/postgresql**, whe
 ###### Linux / macOS:
 
 ```
-cp ./resources/db_configs/Crcdata/db.properties ./i2b2-data-1.8.1a.0001/edu.harvard.i2b2.data/Release_1-8/NewInstall/Crcdata/
-cp ./resources/db_configs/Hivedata/db.properties ./i2b2-data-1.8.1a.0001/edu.harvard.i2b2.data/Release_1-8/NewInstall/Hivedata/
-cp ./resources/db_configs/Imdata/db.properties ./i2b2-data-1.8.1a.0001/edu.harvard.i2b2.data/Release_1-8/NewInstall/Imdata/
-cp ./resources/db_configs/Metadata/db.properties ./i2b2-data-1.8.1a.0001/edu.harvard.i2b2.data/Release_1-8/NewInstall/Metadata/
-cp ./resources/db_configs/Pmdata/db.properties ./i2b2-data-1.8.1a.0001/edu.harvard.i2b2.data/Release_1-8/NewInstall/Pmdata/
-cp ./resources/db_configs/Workdata/db.properties ./i2b2-data-1.8.1a.0001/edu.harvard.i2b2.data/Release_1-8/NewInstall/Workdata/
+cp ./resources/db_configs/Crcdata/db.properties ./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/NewInstall/Crcdata/
+cp ./resources/db_configs/Hivedata/db.properties ./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/NewInstall/Hivedata/
+cp ./resources/db_configs/Imdata/db.properties ./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/NewInstall/Imdata/
+cp ./resources/db_configs/Metadata/db.properties ./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/NewInstall/Metadata/
+cp ./resources/db_configs/Pmdata/db.properties ./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/NewInstall/Pmdata/
+cp ./resources/db_configs/Workdata/db.properties ./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/NewInstall/Workdata/
 ```
 
 ###### Windows:
 
 ```
-copy ./resources/db_configs/Crcdata/db.properties ./i2b2-data-1.8.1a.0001/edu.harvard.i2b2.data/Release_1-8/NewInstall/Crcdata/
-copy ./resources/db_configs/Hivedata/db.properties ./i2b2-data-1.8.1a.0001/edu.harvard.i2b2.data/Release_1-8/NewInstall/Hivedata/
-copy ./resources/db_configs/Imdata/db.properties ./i2b2-data-1.8.1a.0001/edu.harvard.i2b2.data/Release_1-8/NewInstall/Imdata/
-copy ./resources/db_configs/Metadata/db.properties ./i2b2-data-1.8.1a.0001/edu.harvard.i2b2.data/Release_1-8/NewInstall/Metadata/
-copy ./resources/db_configs/Pmdata/db.properties ./i2b2-data-1.8.1a.0001/edu.harvard.i2b2.data/Release_1-8/NewInstall/Pmdata/
-copy ./resources/db_configs/Workdata/db.properties ./i2b2-data-1.8.1a.0001/edu.harvard.i2b2.data/Release_1-8/NewInstall/Workdata/
+copy ./resources/db_configs/Crcdata/db.properties ./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/NewInstall/Crcdata/
+copy ./resources/db_configs/Hivedata/db.properties ./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/NewInstall/Hivedata/
+copy ./resources/db_configs/Imdata/db.properties ./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/NewInstall/Imdata/
+copy ./resources/db_configs/Metadata/db.properties ./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/NewInstall/Metadata/
+copy ./resources/db_configs/Pmdata/db.properties ./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/NewInstall/Pmdata/
+copy ./resources/db_configs/Workdata/db.properties ./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/NewInstall/Workdata/
 ```
 
 #### Run the Ant Script to Import the i2b2 Demo Data
@@ -216,16 +217,16 @@ Execute the following command to run the ant script to import the i2b2 demo data
 ###### Linux / macOS:
 
 ```
-./i2b2-data-1.8.1a.0001/edu.harvard.i2b2.data/Release_1-8/apache-ant/bin/ant \
--f ./i2b2-data-1.8.1a.0001/edu.harvard.i2b2.data/Release_1-8/NewInstall/build.xml \
+./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/apache-ant/bin/ant \
+-f ./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/NewInstall/build.xml \
 create_database load_demodata
 ```
 
 ###### Windows:
 
 ```
-./i2b2-data-1.8.1a.0001/edu.harvard.i2b2.data/Release_1-8/apache-ant/bin/ant ^
--f ./i2b2-data-1.8.1a.0001/edu.harvard.i2b2.data/Release_1-8/NewInstall/build.xml ^
+./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/apache-ant/bin/ant ^
+-f ./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/NewInstall/build.xml ^
 create_database load_demodata
 ```
 
@@ -253,6 +254,17 @@ The following user accounts was added in database:
 |---------------------|----------|---------------|------------|
 | demo@i2b2.org       |          | user          | federated  |
 
+For Shrine user, execute the following command:
+```
+psql postgresql://postgres:demouser@localhost:5432/i2b2 -f ./resources/shrine.sql
+```
+
+The following user accounts was added in database:
+
+| Username            | Password | Account Type  | Login Type |
+|---------------------|----------|---------------|------------|
+| shrine              | demouser | user          | local      |
+
 ### Save the Docker Container State to the Docker Image
 
 The changes made to the Docker container need to be saved to the Docker image so that the data is still there when the image is launched into a new container.
@@ -266,14 +278,14 @@ docker ps
 The output should be similar to the following:
 
 ```
-CONTAINER ID   IMAGE                             COMMAND                  CREATED          STATUS          PORTS                                       NAMES
-43d1bc5c57fd   local/i2b2-data-demo-postgresql   "container-entrypoin…"   47 minutes ago   Up 47 minutes   0.0.0.0:5432->5432/tcp, :::5432->5432/tcp   i2b2-data-demo
+CONTAINER ID   IMAGE                       COMMAND                  CREATED         STATUS         PORTS                                         NAMES
+28640240d7c9   postgres:14.19-alpine3.22   "docker-entrypoint.s…"   6 seconds ago   Up 5 seconds   0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp   i2b2-data-demo
 ```
 
-The container ID is **43d1bc5c57fd** in this example.  execute the following command to save the state of the container to the image:
+The container ID is **28640240d7c9** in this example.  execute the following command to save the state of the container to the image:
 
 ```
-docker commit 43d1bc5c57fd local/i2b2-data-demo-postgresql
+docker commit 28640240d7c9 local/i2b2-data-demo-postgresql
 ```
 
 ### Docker Container and Image Management

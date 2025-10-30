@@ -1,31 +1,48 @@
-FROM kvb2univpitt/centos7-php-shibboleth:v1.2022.06
+FROM php:8.4-apache
 
 LABEL maintainer="Kevin Bui"
 
-COPY resources/bin/startup.sh /usr/local/bin/
+# Utilities
+RUN apt update && apt -y install --install-recommends libapache2-mod-shib
+RUN apt clean && apt autoclean && rm -r /var/lib/apt/lists/*
 
-# COPY v1.8.1a.0001.zip /tmp
-RUN curl -s -L -o /tmp/v1.8.1a.0001.zip https://github.com/i2b2/i2b2-webclient/archive/refs/tags/v1.8.1a.0001.zip
-RUN unzip /tmp/v1.8.1a.0001.zip -d /var/www/html/ \
-    && mv /var/www/html/i2b2-webclient-1.8.1a.0001 /var/www/html/webclient \
-    && rm -f /tmp/v1.8.1a.0001.zip
+# COPY i2b2-webclient-1.8.2.tar.gz /tmp
+RUN curl -s -L -o /tmp/i2b2-webclient-1.8.2.tar.gz https://github.com/i2b2/i2b2-webclient/archive/refs/tags/v1.8.2.tar.gz
+RUN tar xzf /tmp/i2b2-webclient-1.8.2.tar.gz -C /var/www/html/
+RUN mv /var/www/html/i2b2-webclient-1.8.2 /var/www/html/webclient
+RUN rm -f /tmp/i2b2-webclient-1.8.2.tar.gz
 
-COPY resources/shibboleth/ /etc/shibboleth/
-COPY resources/httpd/conf/ /etc/httpd/conf/
-COPY resources/httpd/conf.d/ /etc/httpd/conf.d/
 COPY resources/www/ /var/www/html/
 
-RUN test -d /var/run/lock || mkdir -p /var/run/lock \
-    && test -d /var/lock/subsys/ || mkdir -p /var/lock/subsys/ \
-    && chmod +x /etc/shibboleth/shibd-redhat \
-    && echo $'export LD_LIBRARY_PATH=/opt/shibboleth/lib64:$LD_LIBRARY_PATH\n' > /etc/sysconfig/shibd \
-    && chmod +x /etc/sysconfig/shibd /etc/shibboleth/shibd-redhat /usr/local/bin/startup.sh
+# Configure SSL
+RUN openssl req -x509 -newkey rsa:2048 -keyout /etc/ssl/private/server.key -out /etc/ssl/certs/server.crt -sha256 -days 3652 -nodes -subj "/CN=localhost"
+ADD resources/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
 
-RUN rm /etc/httpd/conf.d/welcome.conf
+# Configure Apache
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+ADD resources/apache2/ports.conf /etc/apache2/ports.conf
+COPY resources/apache2/sites-available/ /etc/apache2/sites-available/
 
-HEALTHCHECK --interval=1m --timeout=30s \
-    CMD curl -k -f https://127.0.0.1/Shibboleth.sso/Status || exit 1
+# Configure Shibboleth
+# RUN shib-keygen -h localhost -e https://localhost/shibboleth -n sp-signing
+# RUN shib-keygen -h localhost -e https://localhost/shibboleth -n sp-encrypt
+COPY resources/shibboleth/ /etc/shibboleth/
+
+# Disable Sites
+RUN a2dissite 000-default.conf
+
+# Enable Sites
+RUN a2ensite default-ssl.conf
+RUN a2ensite wildfly.conf
+RUN a2ensite shib.conf
+
+# Enable Modules
+RUN a2enmod proxy && a2enmod proxy_http
+RUN a2enmod ssl && a2enmod rewrite
+RUN a2enmod shib
+
+ADD resources/bin/shibd-apache2 /sbin/shibd-apache2
 
 EXPOSE 80 443
 
-CMD ["/usr/local/bin/startup.sh"]
+ENTRYPOINT ["shibd-apache2"]

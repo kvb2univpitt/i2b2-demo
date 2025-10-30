@@ -1,35 +1,48 @@
-FROM php:7.4.30-apache
+FROM php:8.4.8-apache
 
 LABEL maintainer="Kevin Bui"
 
 # Utilities
-RUN apt-get update && \
-    apt-get -y install apt-transport-https git curl vim --no-install-recommends && \
-    rm -r /var/lib/apt/lists/*
+RUN apt update
+RUN apt clean && apt autoclean && rm -r /var/lib/apt/lists/*
 
 # SimpleSAMLphp
-ARG SIMPLESAMLPHP_VERSION=1.19.5
+ARG SIMPLESAMLPHP_VERSION=2.4.3
 
-RUN curl -s -L -o /tmp/simplesamlphp.tar.gz https://github.com/simplesamlphp/simplesamlphp/releases/download/v$SIMPLESAMLPHP_VERSION/simplesamlphp-$SIMPLESAMLPHP_VERSION.tar.gz
-RUN tar xzf /tmp/simplesamlphp.tar.gz -C /tmp && \
-    rm -f /tmp/simplesamlphp.tar.gz  && \
-    mv /tmp/simplesamlphp-* /var/www/simplesamlphp && \
-    touch /var/www/simplesamlphp/modules/exampleauth/enable
-COPY config/simplesamlphp/config.php /var/www/simplesamlphp/config
-COPY config/simplesamlphp/authsources.php /var/www/simplesamlphp/config
-COPY config/simplesamlphp/saml20-sp-remote.php /var/www/simplesamlphp/metadata
-COPY config/simplesamlphp/server.crt /var/www/simplesamlphp/cert/
-COPY config/simplesamlphp/server.pem /var/www/simplesamlphp/cert/
+# COPY simplesamlphp-2.4.3-slim.tar.gz /tmp/simplesamlphp.tar.gz
+RUN curl -s -L -o /tmp/simplesamlphp.tar.gz https://github.com/simplesamlphp/simplesamlphp/releases/download/v$SIMPLESAMLPHP_VERSION/simplesamlphp-$SIMPLESAMLPHP_VERSION-slim.tar.gz
+RUN tar xzf /tmp/simplesamlphp.tar.gz -C /tmp
+RUN rm -f /tmp/simplesamlphp.tar.gz
+RUN mv /tmp/simplesamlphp-* /var/www/simplesamlphp
 
-# Apache
-COPY config/apache/ports.conf /etc/apache2
-COPY config/apache/simplesamlphp.conf /etc/apache2/sites-available
-COPY config/apache/cert.crt /etc/ssl/cert/cert.crt
-COPY config/apache/private.key /etc/ssl/private/private.key
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf && \
-    a2enmod ssl && \
-    a2dissite 000-default.conf default-ssl.conf && \
-    a2ensite simplesamlphp.conf
+ADD resources/phpinfo.php /var/www/simplesamlphp/public/phpinfo.php
+
+RUN mkdir -p /var/cache/simplesamlphp
+RUN chown www-data:www-data /var/cache/simplesamlphp
+
+# RUN openssl req -newkey rsa:3072 -new -x509 -days 3652 -nodes -out /var/www/simplesamlphp/cert/server.crt -keyout /var/www/simplesamlphp/cert/server.pem -subj "/C=/ST=/L=/O=/OU=/CN=localhost"
+# RUN chmod 644 /var/www/simplesamlphp/cert/server.crt
+# RUN chmod 644 /var/www/simplesamlphp/cert/server.pem
+
+# Configure SimpleSAMLphp
+COPY resources/simplesamlphp/cert/ /var/www/simplesamlphp/cert/
+COPY resources/simplesamlphp/config/ /var/www/simplesamlphp/config/
+COPY resources/simplesamlphp/metadata/ /var/www/simplesamlphp/metadata/
+
+# Configure Apache
+COPY resources/apache/ports.conf /etc/apache2
+COPY resources/apache/simplesamlphp.conf /etc/apache2/sites-available
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+
+# Install SSL
+RUN openssl req -x509 -newkey rsa:2048 -keyout /etc/ssl/private/server.key -out /etc/ssl/certs/server.crt -sha256 -days 3652 -nodes -subj "/CN=localhost"
+
+# Enable Modules
+RUN a2enmod ssl
+
+# Enable Sites
+RUN a2dissite 000-default.conf default-ssl.conf
+RUN a2ensite simplesamlphp.conf
 
 # Set work dir
 WORKDIR /var/www/simplesamlphp

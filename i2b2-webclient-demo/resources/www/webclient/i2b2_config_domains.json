@@ -4,17 +4,19 @@
     "lstDomains": [
         {
             "domain": "i2b2demo",
-            "name": "Local Demo",
+            "name": "i2b2 Local Demo",
             "urlCellPM": "http://localhost:9090/i2b2/services/PMService/",
             "allowAnalysis": true,
-            "debug": false
+            "ignorePasswordMgrs": true,
+            "debug": true
         },
         {
             "domain": "i2b2demo",
-            "name": "SAML Demo",
+            "name": "i2b2 SAML Demo",
             "urlCellPM": "http://localhost:9090/i2b2/services/PMService/",
             "allowAnalysis": true,
-            "debug": false,
+            "ignorePasswordMgrs": true,
+            "debug": true,
             "saml": {
                 "shibboleth": {
                     "redirect": "saml-redirect.php",

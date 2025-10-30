@@ -1,6 +1,6 @@
 # i2b2-webclient-demo
 
-A Docker image of i2b2 web client ([Release 1.8.1a](https://github.com/i2b2/i2b2-webclient/releases/tag/v1.8.1a.0001)) for demonstration purposes.
+A Docker image of i2b2 web client ([Release 1.8.2](https://github.com/i2b2/i2b2-webclient/releases/tag/v1.8.2)) for demonstration purposes.
 
 ## Docker User-defined Bridge Network
 
@@ -35,30 +35,30 @@ A prebuilt Docker image is provided on [Docker Hub](https://hub.docker.com/r/kvb
 
 ### Prerequisites
 
-- [Docker 19 or above](https://docs.docker.com/get-docker/)
+- [Docker 28 or above](https://docs.docker.com/get-docker/)
 
 Open up a terminal and execute the following command to download and run the prebuilt image in a container named ***i2b2-webclient-demo***.
 
 ###### Linux / macOS:
 
 ```
-docker run -d \
---name=i2b2-webclient-demo \
+docker run -d --name=i2b2-webclient-demo \
 --network i2b2-demo-net \
 -e TZ=America/New_York \
--p 80:80 -p 443:443 \
-kvb2univpitt/i2b2-webclient-demo:v1.8.1a.2025.09
+-p 80:80 \
+-p 443:443 \
+kvb2univpitt/i2b2-webclient-demo:v1.8.2.2025.10
 ```
 
 ###### Windows:
 
 ```
-docker run -d ^
---name=i2b2-webclient-demo ^
+docker run -d --name=i2b2-webclient-demo ^
 --network i2b2-demo-net ^
 -e TZ=America/New_York ^
--p 80:80 -p 443:443 ^
-kvb2univpitt/i2b2-webclient-demo:v1.8.1a.2025.09
+-p 80:80 ^
+-p 443:443 ^
+kvb2univpitt/i2b2-webclient-demo:v1.8.2.2025.10
 ```
 
 ### Access the Web Client
@@ -105,7 +105,7 @@ docker rmi kvb2univpitt/i2b2-webclient-demo:v1.8.1a.2025.09
 
 ### Prerequisites
 
-- [Docker or above](https://docs.docker.com/get-docker/)
+- [Docker 28 or above](https://docs.docker.com/get-docker/)
 
 ### Build the Docker Image:
 
@@ -124,9 +124,8 @@ docker images
 The output should be similar to the following:
 
 ```
-REPOSITORY                  TAG          IMAGE ID       CREATED          SIZE
-local/i2b2-webclient-demo   latest       de79feaaa0ca   43 seconds ago   924MB
-kvb2univpitt/centos7-php    v1.2022.01   2d412beb7609   2 weeks ago      875MB
+REPOSITORY                         TAG              IMAGE ID       CREATED        SIZE
+kvb2univpitt/i2b2-webclient-demo   v1.8.2.2025.10   f8012a63e7c6   12 hours ago   697MB
 ```
 
 ### Run the Image In a Container
@@ -138,7 +137,9 @@ Execute the following command the run the image in a Docker container name ***i2
 ```
 docker run -d --name=i2b2-webclient-demo \
 --network i2b2-demo-net \
--p 80:80 -p 443:443 \
+-e TZ=America/New_York \
+-p 80:80 \
+-p 443:443 \
 local/i2b2-webclient-demo
 ```
 
@@ -147,7 +148,9 @@ local/i2b2-webclient-demo
 ```
 docker run -d --name=i2b2-webclient-demo ^
 --network i2b2-demo-net ^
--p 80:80 -p 443:443 ^
+-e TZ=America/New_York ^
+-p 80:80 ^
+-p 443:443 ^
 local/i2b2-webclient-demo
 ```
 
