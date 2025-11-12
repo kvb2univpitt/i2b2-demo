@@ -23,4 +23,4 @@ EOSQL
 
 pg_restore --verbose --username="$POSTGRES_USER" --dbname=i2b2 --format=c /var/lib/postgresql/i2b2-data-demo_1.8.2.dump
 
-# rm -f /var/lib/postgresql/i2b2-data-demo_1.8.2.dump
+rm -f /var/lib/postgresql/i2b2-data-demo_1.8.2.dump

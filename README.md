@@ -20,6 +20,19 @@ The new version of i2b2 (Release 1.8.2) supports federated authentication.  User
     </figcaption>
 </figure>
 
+## Build the i2b2 Demo
+
+### Prerequisites
+
+- [Docker 28 or above](https://docs.docker.com/get-docker/)
+- [Docker Compose 2.0 or above](https://docs.docker.com/compose/)
+
+Open up a terminal in the directory **i2b2-demo** and execute the following commands to build the Docker images:
+
+```
+docker compose build
+```
+
 ## Run the i2b2 Demo
 
 ### Prerequisites
