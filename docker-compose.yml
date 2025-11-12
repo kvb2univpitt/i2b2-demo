@@ -1,6 +1,9 @@
 services:
   i2b2-idp-demo:
     image: kvb2univpitt/i2b2-idp-demo:v2.4.3.2025.10
+    build:
+      context: i2b2-idp-demo
+      dockerfile: Dockerfile
     environment:
       - SIMPLESAMLPHP_ADMIN_PASSWORD=demouser
       - SIMPLESAMLPHP_SECRET_SALT=saltydemouser
@@ -12,8 +15,11 @@ services:
       - 8443:8443
   i2b2-data-demo:
     image: kvb2univpitt/i2b2-data-demo-postgresql:v1.8.2.2025.10
+    build:
+      context: i2b2-data-demo/postgresql
+      dockerfile: Dockerfile
     environment:
-      - POSTGRESQL_ADMIN_PASSWORD=demouser
+      - POSTGRES_PASSWORD=demouser
     container_name: i2b2-data-demo
     networks:
       - i2b2-demo-net
@@ -21,6 +27,9 @@ services:
       - 5432:5432
   i2b2-core-server-demo:
     image: kvb2univpitt/i2b2-core-server-demo-postgresql:v1.8.2.2025.10
+    build:
+      context: i2b2-core-server-demo/postgresql
+      dockerfile: Dockerfile
     container_name: i2b2-core-server-demo
     networks:
       - i2b2-demo-net
@@ -30,6 +39,9 @@ services:
       - 9090:9090
   i2b2-webclient-demo:
     image: kvb2univpitt/i2b2-webclient-demo:v1.8.2.2025.10
+    build:
+      context: i2b2-webclient-demo
+      dockerfile: Dockerfile
     container_name: i2b2-webclient-demo
     networks:
       - i2b2-demo-net
