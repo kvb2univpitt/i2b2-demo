@@ -254,17 +254,6 @@ The following user accounts was added in database:
 |---------------------|----------|---------------|------------|
 | demo@i2b2.org       |          | user          | federated  |
 
-For Shrine user, execute the following command:
-```
-psql postgresql://postgres:demouser@localhost:5432/i2b2 -f ./resources/shrine.sql
-```
-
-The following user accounts was added in database:
-
-| Username            | Password | Account Type  | Login Type |
-|---------------------|----------|---------------|------------|
-| shrine              | demouser | user          | local      |
-
 ### Save the Docker Container State to the Docker Image
 
 The changes made to the Docker container need to be saved to the Docker image so that the data is still there when the image is launched into a new container.
