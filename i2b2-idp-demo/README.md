@@ -144,8 +144,8 @@ docker images
 The output should be similar to the following:
 
 ```
-REPOSITORY            TAG              IMAGE ID       CREATED        SIZE
-local/i2b2-idp-demo   v2.4.3.2025.10   6008a181a735   12 hours ago   698MB
+IMAGE                                                          ID             DISK USAGE   CONTENT SIZE   EXTRA
+kvb2univpitt/i2b2-idp-demo:v2.4.3.2025.10                      2dfaae6895d9       1.01GB          237MB
 ```
 
 ### Run the Image In a Container
