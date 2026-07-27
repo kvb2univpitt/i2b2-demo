@@ -1,6 +1,6 @@
 # i2b2-data-demo (PostgreSQL)
 
-A Docker image of PostgreSQL database containing the i2b2 demo data ([Release 1.8.2](https://github.com/i2b2/i2b2-data/releases/tag/v1.8.2)) for demonstration purposes.
+A Docker image of PostgreSQL database containing the i2b2 demo data ([Release 1.8.3](https://github.com/i2b2/i2b2-data/releases/tag/v1.8.3)) for demonstration purposes.
 
 ## Docker User-defined Bridge Network
 
@@ -46,7 +46,7 @@ docker run -d --name=i2b2-data-demo \
 --network i2b2-demo-net \
 -e POSTGRESQL_ADMIN_PASSWORD=demouser \
 -p 5432:5432 \
-kvb2univpitt/i2b2-data-demo-postgresql:v1.8.2.2025.10
+kvb2univpitt/i2b2-data-demo-postgresql:v1.8.3.2026.07
 ```
 
 ###### Windows:
@@ -56,7 +56,7 @@ docker run -d --name=i2b2-data-demo ^
 --network i2b2-demo-net ^
 -e POSTGRESQL_ADMIN_PASSWORD=demouser ^
 -p 5432:5432 ^
-kvb2univpitt/i2b2-data-demo-postgresql:v1.8.2.2025.10
+kvb2univpitt/i2b2-data-demo-postgresql:v1.8.3.2026.07
 ```
 
 ### Application Users
@@ -103,7 +103,7 @@ docker rm i2b2-data-demo
 Execute the following to delete the Docker image:
 
 ```
-docker rmi kvb2univpitt/i2b2-data-demo-postgresql:v1.8.2.2025.10
+docker rmi kvb2univpitt/i2b2-data-demo-postgresql:v1.8.3.2026.07
 ```
 
 ## Build the Image
@@ -111,7 +111,7 @@ docker rmi kvb2univpitt/i2b2-data-demo-postgresql:v1.8.2.2025.10
 ### Prerequisites
 
 - [Docker version 28 or above](https://docs.docker.com/get-docker/)
--  Java SDK 17 ([Oracle JDK](https://www.oracle.com/java/technologies/javase-downloads.html) or [OpenJDK](https://learn.microsoft.com/en-us/java/openjdk/download))
+-  Java 21 SDK ([Oracle JDK](https://www.oracle.com/java/technologies/javase-downloads.html) or [OpenJDK](https://learn.microsoft.com/en-us/java/openjdk/download))
 - [PostgreSQL](https://www.postgresql.org/download/)
 
 ### Build the Docker Image:
@@ -182,7 +182,7 @@ GRANT
 
 ### Import the i2b2 Demo Data into the Database
 
-Download the zip file [i2b2-data-1.8.2.zip](https://github.com/i2b2/i2b2-data/archive/refs/tags/v1.8.2.zip) and extract it to the directory **i2b2-demo/i2b2-data-demo/postgresql**.
+Download the zip file [i2b2-data-1.8.3.zip](https://github.com/i2b2/i2b2-data/archive/refs/tags/v1.8.3.zip) and extract it to the directory **i2b2-demo/i2b2-data-demo/postgresql**.
 
 #### Copy the Database Property Files to the i2b2-data Software
 
@@ -191,23 +191,23 @@ Open up a terminal in the directory **i2b2-demo/i2b2-data-demo/postgresql**, whe
 ###### Linux / macOS:
 
 ```
-cp ./resources/db_configs/Crcdata/db.properties ./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/NewInstall/Crcdata/
-cp ./resources/db_configs/Hivedata/db.properties ./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/NewInstall/Hivedata/
-cp ./resources/db_configs/Imdata/db.properties ./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/NewInstall/Imdata/
-cp ./resources/db_configs/Metadata/db.properties ./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/NewInstall/Metadata/
-cp ./resources/db_configs/Pmdata/db.properties ./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/NewInstall/Pmdata/
-cp ./resources/db_configs/Workdata/db.properties ./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/NewInstall/Workdata/
+cp ./resources/db_configs/Crcdata/db.properties ./i2b2-data-1.8.3/edu.harvard.i2b2.data/Release_1-8/NewInstall/Crcdata/
+cp ./resources/db_configs/Hivedata/db.properties ./i2b2-data-1.8.3/edu.harvard.i2b2.data/Release_1-8/NewInstall/Hivedata/
+cp ./resources/db_configs/Imdata/db.properties ./i2b2-data-1.8.3/edu.harvard.i2b2.data/Release_1-8/NewInstall/Imdata/
+cp ./resources/db_configs/Metadata/db.properties ./i2b2-data-1.8.3/edu.harvard.i2b2.data/Release_1-8/NewInstall/Metadata/
+cp ./resources/db_configs/Pmdata/db.properties ./i2b2-data-1.8.3/edu.harvard.i2b2.data/Release_1-8/NewInstall/Pmdata/
+cp ./resources/db_configs/Workdata/db.properties ./i2b2-data-1.8.3/edu.harvard.i2b2.data/Release_1-8/NewInstall/Workdata/
 ```
 
 ###### Windows:
 
 ```
-copy ./resources/db_configs/Crcdata/db.properties ./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/NewInstall/Crcdata/
-copy ./resources/db_configs/Hivedata/db.properties ./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/NewInstall/Hivedata/
-copy ./resources/db_configs/Imdata/db.properties ./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/NewInstall/Imdata/
-copy ./resources/db_configs/Metadata/db.properties ./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/NewInstall/Metadata/
-copy ./resources/db_configs/Pmdata/db.properties ./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/NewInstall/Pmdata/
-copy ./resources/db_configs/Workdata/db.properties ./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/NewInstall/Workdata/
+copy ./resources/db_configs/Crcdata/db.properties ./i2b2-data-1.8.3/edu.harvard.i2b2.data/Release_1-8/NewInstall/Crcdata/
+copy ./resources/db_configs/Hivedata/db.properties ./i2b2-data-1.8.3/edu.harvard.i2b2.data/Release_1-8/NewInstall/Hivedata/
+copy ./resources/db_configs/Imdata/db.properties ./i2b2-data-1.8.3/edu.harvard.i2b2.data/Release_1-8/NewInstall/Imdata/
+copy ./resources/db_configs/Metadata/db.properties ./i2b2-data-1.8.3/edu.harvard.i2b2.data/Release_1-8/NewInstall/Metadata/
+copy ./resources/db_configs/Pmdata/db.properties ./i2b2-data-1.8.3/edu.harvard.i2b2.data/Release_1-8/NewInstall/Pmdata/
+copy ./resources/db_configs/Workdata/db.properties ./i2b2-data-1.8.3/edu.harvard.i2b2.data/Release_1-8/NewInstall/Workdata/
 ```
 
 #### Run the Ant Script to Import the i2b2 Demo Data
@@ -217,16 +217,16 @@ Execute the following command to run the ant script to import the i2b2 demo data
 ###### Linux / macOS:
 
 ```
-./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/apache-ant/bin/ant \
--f ./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/NewInstall/build.xml \
+./i2b2-data-1.8.3/edu.harvard.i2b2.data/Release_1-8/apache-ant/bin/ant \
+-f ./i2b2-data-1.8.3/edu.harvard.i2b2.data/Release_1-8/NewInstall/build.xml \
 create_database load_demodata
 ```
 
 ###### Windows:
 
 ```
-./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/apache-ant/bin/ant ^
--f ./i2b2-data-1.8.2/edu.harvard.i2b2.data/Release_1-8/NewInstall/build.xml ^
+./i2b2-data-1.8.3/edu.harvard.i2b2.data/Release_1-8/apache-ant/bin/ant ^
+-f ./i2b2-data-1.8.3/edu.harvard.i2b2.data/Release_1-8/NewInstall/build.xml ^
 create_database load_demodata
 ```
 

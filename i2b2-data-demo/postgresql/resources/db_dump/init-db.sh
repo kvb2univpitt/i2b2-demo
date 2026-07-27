@@ -21,6 +21,6 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
     GRANT ALL PRIVILEGES ON DATABASE i2b2 TO i2b2demodata;
 EOSQL
 
-pg_restore --verbose --username="$POSTGRES_USER" --dbname=i2b2 --format=c /var/lib/postgresql/i2b2-data-demo_1.8.2.dump
+pg_restore --verbose --username="$POSTGRES_USER" --dbname=i2b2 --format=c /var/lib/postgresql/i2b2-data-demo_1.8.3.dump
 
-rm -f /var/lib/postgresql/i2b2-data-demo_1.8.2.dump
+rm -f /var/lib/postgresql/i2b2-data-demo_1.8.3.dump

@@ -14,7 +14,7 @@ services:
       - 8080:8080
       - 8443:8443
   i2b2-data-demo:
-    image: kvb2univpitt/i2b2-data-demo-postgresql:v1.8.2.2025.10
+    image: kvb2univpitt/i2b2-data-demo-postgresql:v1.8.3.2026.07
     build:
       context: i2b2-data-demo/postgresql
       dockerfile: Dockerfile
