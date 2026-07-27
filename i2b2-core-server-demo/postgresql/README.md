@@ -91,6 +91,19 @@ docker rmi kvb2univpitt/i2b2-core-server-demo-postgresql:v1.8.3.2026.07
 
 - [Docker 28 or above](https://docs.docker.com/get-docker/)
 
+### ALERT!!!
+
+The file **i2b2.war** has exceed 100MB and cannot be uploaded onto Github.
+
+You must download the file **i2b2.war** (release 1.8.3) from [https://drive.google.com/file/d/1ANbN9m0HJNUJoFb7bDEx2B7Iw8ExZHxj/view?usp=drive_link](https://drive.google.com/file/d/1ANbN9m0HJNUJoFb7bDEx2B7Iw8ExZHxj/view?usp=drive_link) and put it in the folder following folder:
+
+```
+i2b2-demo/i2b2-core-server-demo/postgresql/resources/opt/wildfly-37.0.1.Final/standalone/deployments
+```
+
+Note that he previous version of the **i2b2.war** file may exists.  Just override the existing file with the downloaded one.
+
+
 ### Build the Docker Image:
 
 Open up a terminal in the directory **i2b2-demo/i2b2-core-server-demo/postgresql**, where the ***Dockerfile*** file is, and execute the following command to build the image:
