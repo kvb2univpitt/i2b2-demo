@@ -1,4 +1,4 @@
-FROM quay.io/wildfly/wildfly:37.0.1.Final-jdk17
+FROM quay.io/wildfly/wildfly:37.0.1.Final-jdk21
 
 LABEL maintainer="Kevin Bui"
 

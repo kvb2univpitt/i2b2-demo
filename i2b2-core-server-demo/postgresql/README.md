@@ -1,6 +1,6 @@
 # i2b2-core-server-demo (PostgreSQL)
 
-A Docker image of Wildfly 37.0.1 server running i2b2-core-server ([Release 1.8.2](https://github.com/i2b2/i2b2-core-server/releases/tag/v1.8.2)) connecting to PostgreSQL database.
+A Docker image of Wildfly 37.0.1 server running i2b2-core-server ([Release 1.8.3](https://github.com/i2b2/i2b2-core-server/releases/tag/v1.8.3)) connecting to PostgreSQL database.
 
 ## Docker User-defined Bridge Network
 
@@ -46,7 +46,7 @@ docker run -d --name=i2b2-core-server-demo \
 --network i2b2-demo-net \
 -e TZ=America/New_York \
 -p 9090:9090 \
-kvb2univpitt/i2b2-core-server-demo-postgresql:v1.8.2.2025.10
+kvb2univpitt/i2b2-core-server-demo-postgresql:v1.8.3.2026.07
 ```
 
 ###### Windows:
@@ -56,7 +56,7 @@ docker run -d --name=i2b2-core-server-demo ^
 --network i2b2-demo-net ^
 -e TZ=America/New_York ^
 -p 9090:9090 ^
-kvb2univpitt/i2b2-core-server-demo-postgresql:v1.8.2.2025.10
+kvb2univpitt/i2b2-core-server-demo-postgresql:v1.8.3.2026.07
 ```
 
 ### Access Service List
@@ -82,7 +82,7 @@ docker rm i2b2-core-server-demo
 Execute the following to delete the Docker image:
 
 ```
-docker rmi kvb2univpitt/i2b2-core-server-demo-postgresql:v1.8.2.2025.10
+docker rmi kvb2univpitt/i2b2-core-server-demo-postgresql:v1.8.3.2026.07
 ```
 
 ## Build the Image
@@ -108,8 +108,8 @@ docker images
 The output should be similar to the following:
 
 ```
-REPOSITORY                               TAG          IMAGE ID       CREATED              SIZE
-local/i2b2-core-server-demo-postgresql   latest       9b1422eb494f   About a minute ago   891MB
+IMAGE                                                          ID             DISK USAGE   CONTENT SIZE   EXTRA
+kvb2univpitt/i2b2-core-server-demo-postgresql:v1.8.3.2026.07   22bdb402513f       1.53GB          588MB
 ```
 
 ### Run the Image In a Container
