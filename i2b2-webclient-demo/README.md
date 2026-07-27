@@ -1,6 +1,6 @@
 # i2b2-webclient-demo
 
-A Docker image of i2b2 web client ([Release 1.8.2](https://github.com/i2b2/i2b2-webclient/releases/tag/v1.8.2)) for demonstration purposes.
+A Docker image of i2b2 web client ([Release 1.8.3](https://github.com/i2b2/i2b2-webclient/releases/tag/v1.8.3)) for demonstration purposes.
 
 ## Docker User-defined Bridge Network
 
@@ -47,7 +47,7 @@ docker run -d --name=i2b2-webclient-demo \
 -e TZ=America/New_York \
 -p 80:80 \
 -p 443:443 \
-kvb2univpitt/i2b2-webclient-demo:v1.8.2.2025.10
+kvb2univpitt/i2b2-webclient-demo:v1.8.3.2026.07
 ```
 
 ###### Windows:
@@ -58,7 +58,7 @@ docker run -d --name=i2b2-webclient-demo ^
 -e TZ=America/New_York ^
 -p 80:80 ^
 -p 443:443 ^
-kvb2univpitt/i2b2-webclient-demo:v1.8.2.2025.10
+kvb2univpitt/i2b2-webclient-demo:v1.8.3.2026.07
 ```
 
 ### Access the Web Client
@@ -124,8 +124,8 @@ docker images
 The output should be similar to the following:
 
 ```
-REPOSITORY                         TAG              IMAGE ID       CREATED        SIZE
-kvb2univpitt/i2b2-webclient-demo   v1.8.2.2025.10   f8012a63e7c6   12 hours ago   697MB
+IMAGE                                                          ID             DISK USAGE   CONTENT SIZE   EXTRA
+kvb2univpitt/i2b2-webclient-demo:v1.8.3.2026.07                a61e69db133f       5.15GB         1.38GB
 ```
 
 ### Run the Image In a Container

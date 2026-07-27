@@ -6,11 +6,11 @@ LABEL maintainer="Kevin Bui"
 RUN apt update && apt -y install --install-recommends libapache2-mod-shib
 RUN apt clean && apt autoclean && rm -r /var/lib/apt/lists/*
 
-# COPY i2b2-webclient-1.8.2.tar.gz /tmp
-RUN curl -s -L -o /tmp/i2b2-webclient-1.8.2.tar.gz https://github.com/i2b2/i2b2-webclient/archive/refs/tags/v1.8.2.tar.gz
-RUN tar xzf /tmp/i2b2-webclient-1.8.2.tar.gz -C /var/www/html/
-RUN mv /var/www/html/i2b2-webclient-1.8.2 /var/www/html/webclient
-RUN rm -f /tmp/i2b2-webclient-1.8.2.tar.gz
+# COPY i2b2-webclient-1.8.3.tar.gz /tmp
+RUN curl -s -L -o /tmp/i2b2-webclient-1.8.3.tar.gz https://github.com/i2b2/i2b2-webclient/archive/refs/tags/v1.8.3.tar.gz
+RUN tar xzf /tmp/i2b2-webclient-1.8.3.tar.gz -C /var/www/html/
+RUN mv /var/www/html/i2b2-webclient-1.8.3 /var/www/html/webclient
+RUN rm -f /tmp/i2b2-webclient-1.8.3.tar.gz
 
 COPY resources/www/ /var/www/html/
 
