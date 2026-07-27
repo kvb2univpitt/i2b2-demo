@@ -4,14 +4,14 @@ A collection of Docker images preinstalled with [i2b2 software](https://www.i2b2
 
 The following software are preinstalled:
 
-- i2b2 Data [Release 1.8.2](https://github.com/i2b2/i2b2-data/releases/tag/v1.8.2)
-- i2b2 Core Server [Release 1.8.2](https://github.com/i2b2/i2b2-core-server/releases/tag/v1.8.2)
-- i2b2 Web Client [Release 1.8.2](https://github.com/i2b2/i2b2-webclient/releases/tag/v1.8.2)
+- i2b2 Data [Release 1.8.3](https://github.com/i2b2/i2b2-data/releases/tag/v1.8.3)
+- i2b2 Core Server [Release 1.8.3](https://github.com/i2b2/i2b2-core-server/releases/tag/v1.8.3)
+- i2b2 Web Client [Release 1.8.3](https://github.com/i2b2/i2b2-webclient/releases/tag/v1.8.3)
 - SimpleSAMLphp [Release 2.4.3](https://github.com/simplesamlphp/simplesamlphp/releases/tag/v2.4.3)
 
 ## Local and Federated Authentication
 
-The new version of i2b2 (Release 1.8.2) supports federated authentication.  Users can choose to log into the i2b2 webclient using their i2b2 local account (local login) or use their login account from a supported third-party identity provider (federated login).  The i2b2 Docker demo includes both local login and federated login.  SimpleSAMLphp is setup as a demo identity provider (IdP).
+The new version of i2b2 (Release 1.8.3) supports federated authentication.  Users can choose to log into the i2b2 webclient using their i2b2 local account (local login) or use their login account from a supported third-party identity provider (federated login).  The i2b2 Docker demo includes both local login and federated login.  SimpleSAMLphp is setup as a demo identity provider (IdP).
 
 <figure>
     <img src = "./img/auth_flow.png" />
