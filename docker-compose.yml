@@ -1,6 +1,6 @@
 services:
   i2b2-idp-demo:
-    image: kvb2univpitt/i2b2-idp-demo:v2.4.3.2025.10
+    image: local/i2b2-idp-demo:v2.4.3.2025.10
     build:
       context: i2b2-idp-demo
       dockerfile: Dockerfile
@@ -14,7 +14,7 @@ services:
       - 8080:8080
       - 8443:8443
   i2b2-data-demo:
-    image: kvb2univpitt/i2b2-data-demo-postgresql:v1.8.3.2026.07
+    image: local/i2b2-data-demo-postgresql:v1.8.3.2026.07
     build:
       context: i2b2-data-demo/postgresql
       dockerfile: Dockerfile
@@ -25,8 +25,13 @@ services:
       - i2b2-demo-net
     ports:
       - 5432:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U i2b2pm -d i2b2"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
   i2b2-core-server-demo:
-    image: kvb2univpitt/i2b2-core-server-demo-postgresql:v1.8.2.2025.10
+    image: local/i2b2-core-server-demo-postgresql:v1.8.3.2026.07
     build:
       context: i2b2-core-server-demo/postgresql
       dockerfile: Dockerfile
@@ -34,11 +39,18 @@ services:
     networks:
       - i2b2-demo-net
     depends_on:
-      - i2b2-data-demo
+      i2b2-data-demo:
+        condition: service_healthy
     ports:
       - 9090:9090
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9990/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
   i2b2-webclient-demo:
-    image: kvb2univpitt/i2b2-webclient-demo:v1.8.2.2025.10
+    image: local/i2b2-webclient-demo:v1.8.3.2026.07
     build:
       context: i2b2-webclient-demo
       dockerfile: Dockerfile
